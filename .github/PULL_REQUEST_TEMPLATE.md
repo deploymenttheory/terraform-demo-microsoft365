@@ -1,6 +1,6 @@
 # Change
 
-***Feel free to remove this sample text***
+***State your intended change to Jamf Pro***
 >Thank you for your contribution !
 Please include a summary of the change and which issue is fixed.
 Please also include relevant motivation and context.
@@ -14,7 +14,7 @@ Please delete options that are not relevant.
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] This change requires a documentation update (Wiki)
-- [ ] Refactor of existing code
+- [ ] Refactor (refactoring code, removing code, changing code structure)
 
 ## Checklist
 

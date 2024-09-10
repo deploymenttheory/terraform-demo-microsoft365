@@ -1,75 +1,224 @@
-# Template
+# Terraform Jamf Pro Configuration Repository
 
-This repository serves as a **Default Template Repository** according official [GitHub Contributing Guidelines][ProjectSetup] for healthy contributions. It brings you clean default Templates for several areas:
+This repository contains Terraform configurations for managing resources in Jamf Pro across multiple environments using the Jamf Pro Terraform provider. The workflows defined here automate the planning and application of Terraform configurations to your Jamf Pro environments, ensuring that your Jamf Pro settings are version-controlled and consistently applied.
 
-- [Azure DevOps Pull Requests](.azuredevops/PULL_REQUEST_TEMPLATE.md) ([`.azuredevops\PULL_REQUEST_TEMPLATE.md`](`.azuredevops\PULL_REQUEST_TEMPLATE.md`))
-- [Azure Pipelines](.pipelines/pipeline.yml) ([`.pipelines/pipeline.yml`](`.pipelines/pipeline.yml`))
-- [GitHub Workflows](.github/workflows/)
-  - [Super Linter](.github/workflows/linter.yml) ([`.github/workflows/linter.yml`](`.github/workflows/linter.yml`))
-  - [Sample Workflows](.github/workflows/workflow.yml) ([`.github/workflows/workflow.yml`](`.github/workflows/workflow.yml`))
-- [GitHub Pull Requests](.github/PULL_REQUEST_TEMPLATE.md) ([`.github/PULL_REQUEST_TEMPLATE.md`](`.github/PULL_REQUEST_TEMPLATE.md`))
-- [GitHub Issues](.github/ISSUE_TEMPLATE/)
-  - [Feature Requests](.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md) ([`.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md`](`.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md`))
-  - [Bug Reports](.github/ISSUE_TEMPLATE/BUG_REPORT.md) ([`.github/ISSUE_TEMPLATE/BUG_REPORT.md`](`.github/ISSUE_TEMPLATE/BUG_REPORT.md`))
-- [Codeowners](.github/CODEOWNERS) ([`.github/CODEOWNERS`](`.github/CODEOWNERS`)) _adjust usernames once cloned_
-- [Wiki and Documentation](docs/) ([`docs/`](`docs/`))
-- [gitignore](.gitignore) ([`.gitignore`](.gitignore))
-- [gitattributes](.gitattributes) ([`.gitattributes`](.gitattributes))
-- [Changelog](CHANGELOG.md) ([`CHANGELOG.md`](`CHANGELOG.md`))
-- [Code of Conduct](CODE_OF_CONDUCT.md) ([`CODE_OF_CONDUCT.md`](`CODE_OF_CONDUCT.md`))
-- [Contribution](CONTRIBUTING.md) ([`CONTRIBUTING.md`](`CONTRIBUTING.md`))
-- [License](LICENSE) ([`LICENSE`](`LICENSE`)) _adjust projectname once cloned_
-- [Readme](README.md) ([`README.md`](`README.md`))
-- [Security](SECURITY.md) ([`SECURITY.md`](`SECURITY.md`))
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Repository Structure](#repository-structure)
+- [Environment Setup](#environment-setup)
+- [Workflow Overview](#workflow-overview)
+- [Branching Strategy](#branching-strategy)
+- [Drift Detection and Correction](#drift-detection-and-correction)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Prerequisites
+
+Before you begin, ensure you have the following prerequisites in place:
+
+- **Jamf Pro Client Credentials**: A Jamf Pro client id and secret with appropriate API access is required. [Client Credentials](https://developer.jamf.com/jamf-pro/docs/client-credentials).
+- **Terraform Cloud**: An account on Terraform Cloud for managing Terraform state and running Terraform in a consistent environment. [Sign up for Terraform Cloud](https://app.terraform.io/signup/account).
+- **GitHub Account**: A GitHub account for storing this repository and using GitHub Actions for automation. [Sign up for GitHub](https://github.com/join).
+- **Fork this repository**: Start by forking this repository into your GitHub account to make changes. You can fork the repository by clicking the "Fork" button at the top right corner of the repository page. Ensure that you unselect `Copy the sandbox branch only` so that all branches are copied to your forked repository.
+
+## Repository Structure
+
+```
+.
+├── .github
+│   └── workflows
+│       ├── 00-hotfix.yml
+│       ├── 01-terraform-plan-sandbox.yml
+│       ├── 02-terraform-apply-sandbox.yml
+│       ├── 03-release-and-plan-staging.yml
+│       ├── 04-terraform-apply-staging.yml
+│       ├── 05-release-and-plan-production.yml
+│       ├── 06-terraform-apply-production.yml
+│       ├── branch-cleanup.yml
+│       ├── create-pr.yml
+│       ├── create-version-and-release.yml
+│       ├── drift.yml
+│       ├── lint.yml
+│       ├── send-notification.yml
+│       ├── terraform-apply.yml
+│       ├── terraform-plan.yml
+│       └── update-release.yml
+├── workload
+│   ├── scripts
+│   │   ├── hash_generator.py
+│   │   └── version_determinator.py
+│   └── terraform
+│       └── jamfpro
+│           ├── main.tf
+│           ├── variables.tf
+│           └── outputs.tf
+├── README.md
+└── .gitignore
+```
+
+## Environment Setup
+
+This project supports three environments:
+
+1. Sandbox
+2. Staging
+3. Production
+
+Each environment has its own Terraform Cloud workspace:
+
+- `terraform-jamfpro-sandbox`
+- `terraform-jamfpro-staging`
+- `terraform-jamfpro-production`
+
+## Workflow Overview
+
+1. Developers create short-lived branches prefixed with:
+   - `feat-*`
+   - `fix-*`
+   - `docs-*`
+   - `style-*`
+   - `refactor-*`
+   - `test-*`
+   - `chore-*`
+   - `build-*`
+   - `ci-*`
+   - `perf-*`
+   
+   This follows the [Conventional Commits](https://sentenz.github.io/convention/convention/conventional-commits/) specification for commit messages. These branches are merged into the `sandbox` branch for testing.
+
+2. Automated Terraform Planning and PR Management:
+
+   Upon pushing changes to branches matching patterns like feat-*, fix-*, ci-*, etc., the `01-terraform-plan-sandbox.yml` workflow is triggered automatically.
+   This workflow performs the following actions:
+   - Runs a Terraform speculative plan against the Sandbox environment.
+   - Automatically creates a new Pull Request (PR) to the sandbox branch if one doesn't exist, or updates an existing PR.
+   - Adds or updates a comment in the PR with the results of the Terraform plan, including the number of resources to be added, changed, or destroyed.
+   - Provides a link to the full plan details in Terraform Cloud within the PR comment.
+   This process ensures that every push to a feature branch is automatically checked, planned, and documented, facilitating easier review and understanding of proposed changes before merging into the sandbox branch.
+
+3. Once all desired changes have been tested, the short-lived branch is PR'd into the sandbox branch.
+   Once merged into the sandbox branch, the changes are automatically applied to the Sandbox environment by `02-terraform-apply-sandbox.yml`.
+
+4. Once the changes are applied to the Sandbox environment, promotion to Staging begins:
+   - The `03 - release and terraform plan to: staging` workflow is manually triggered from the sandbox branch.
+   - This workflow creates a new version and a new release branch (e.g., `release-v1.2.3`).
+   - It then generates a Terraform plan for the Staging environment using this release branch.
+   - A pull request is created from the release branch to the staging branch, with the plan for review.
+
+5. After the pull request is reviewed and approved:
+   - The pull request is merged into the staging branch.
+   - This triggers the `04-terraform-apply-staging` workflow.
+   - The workflow checks that the merge is from a release branch (starting with `release-v`), then applies the Terraform changes to the Staging environment.
+   - After successful apply, the release branch is cleaned up (deleted).
+
+6. The process for promoting to Production follows a similar pattern:
+   - A manual trigger of the `05 - release and terraform plan to: production` workflow is done from the staging branch.
+   - A new release branch is created for production promotion.
+   - After review and approval, the changes are applied to the Production environment.
+   - The production release branch is cleaned up after successful apply.
+This approach ensures that each promotion to staging or production is associated with a specific release version, allowing for version tracking and potential rollback if needed.
+
+## Branching Strategy
+
+Our branching strategy consists of long-lived branches, short-lived feature branches, and temporary release branches. Here's a detailed breakdown:
+
+| Branch Type | Branch Name | Purpose | Lifecycle |
+|-------------|-------------|---------|-----------|
+| Long-lived  | `sandbox`   | Represents the sandbox environment. All feature branches are merged here first. | Permanent |
+| Long-lived  | `staging`   | Represents the staging environment. Release branches are merged here for testing before production. | Permanent |
+| Long-lived  | `production` | Represents the production environment. Final destination for all changes. | Permanent |
+| Short-lived | `feat-*`    | For developing new features | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `fix-*`     | For fixing bugs | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `docs-*`    | For documentation updates | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `style-*`   | For code style changes (formatting, missing semi colons, etc.) | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `refactor-*`| For code refactoring | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `test-*`    | For adding or updating tests | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `chore-*`   | For routine tasks or maintenance | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `build-*`   | For changes that affect the build system or external dependencies | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `ci-*`      | For changes to CI configuration files and scripts | Merged to `sandbox` when complete, then deleted |
+| Short-lived | `perf-*`    | For performance improvements | Merged to `sandbox` when complete, then deleted |
+| Temporary   | `release-v*` | Created for each release to staging or production | Created during release process, used for final review and applying changes, then deleted after successful apply |
+
+### Branch Flow
+
+```shell
+Time ----->
+
+ feat-*  
+ fix-*    
+ docs-*          release-v1.0.0            release-v1.1.0
+ style-*         (sandbox to staging)      (staging to production)
+ refactor-*            |                          |
+ test-*                |                          |
+ ci-*                  |                          |
+ chore-*               |                          |
+   |                   |                          |
+   v                   v                          v
++--------+        +--------+                 +--------+
+|        |        |        |                 |        |
+| Sandbox|------->| Sandbox|---------------->| Sandbox|  (Default branch)
+|        |        |        |                 |        |
++--------+        +--------+                 +--------+
+     ^                 | PR                       | PR
+     |                 |                          |
+     |                 +                          +
+     |            +--------+                 +--------+ 
+     |            |        |                 |        |
+     +------------| Staging|---------------->| Staging|
+     |            |        |                 |        |
+     |            +--------+                 +--------+
+     |                 ^                          | PR
+     |                 |                          |
+     |                 |                          +
+     |                 |                    +----------+
+     |                 |                    |          |
+     +-----------------+---------------====>|Production|
+                       .                    |          |
+                       .                    +----------+
+                       .
+                       +---> Branch deleted after merge
+
+ Legend:
+ -----> : Git Flow
+ -----+ : Pull Request
+ ====> : Hotfix Flow (when needed)
+ ...   : Branch deletion
+```
 
 
-## Status
+### Notes
 
-[![Super Linter](<https://github.com/segraef/Template/actions/workflows/linter.yml/badge.svg>)](<https://github.com/segraef/Template/actions/workflows/linter.yml>)
+- Hotfixes may bypass the normal flow in emergencies, but should be backported to ensure all environments stay in sync.
+- Release branches (`release-v*`) are temporary and serve as a stable point for final testing and deployment. They are deleted after successful merge and apply.
+- Long-lived branches (`sandbox`, `staging`, `production`) should never be deleted and represent the state of each environment.
 
-[![Sample Workflow](<https://github.com/segraef/Template/actions/workflows/workflow.yml/badge.svg>)](<https://github.com/segraef/Template/actions/workflows/workflow.yml>)
+## Drift Detection and Correction
 
-## Creating a repository from a template
+The `drift-detection-correction.yml` workflow runs nightly to detect and correct any drift in your environments:
 
-You can [generate](https://github.com/segraef/Template/generate) a new repository with the same directory structure and files as an existing repository. More details can be found [here][CreateFromTemplate].
+- Checks for drift in Sandbox, Staging, and Production environments
+- Automatically corrects drift if detected (i.e manual changes made outside of Terraform in the jamf pro gui)
+- Sends notifications (configure as needed)
 
-## Reporting Issues and Feedback
+## Getting Started
 
-### Issues and Bugs
+[Getting Started Guide](./docs/getting-started.md)
 
-If you find any bugs, please file an issue in the [GitHub Issues][GitHubIssues] page. Please fill out the provided template with the appropriate information.
+## Troubleshooting
 
-If you are taking the time to mention a problem, even a seemingly minor one, it is greatly appreciated, and a totally valid contribution to this project. **Thank you!**
+- Check GitHub Actions logs for detailed error messages
+- Verify Terraform Cloud workspace configurations
+- Ensure Jamf Pro API credentials are correct and have necessary permissions
 
-## Feedback
+## Contributing
 
-If there is a feature you would like to see in here, please file an issue or feature request in the [GitHub Issues][GitHubIssues] page to provide direct feedback.
+1. Fork the repository
+2. Create a new branch with the appropriate prefix
+3. Make your changes
+4. Submit a pull request
 
-## Contribution
+## License
 
-If you would like to become an active contributor to this repository or project, please follow the instructions provided in [`CONTRIBUTING.md`][Contributing].
-
-## Learn More
-
-* [GitHub Documentation][GitHubDocs]
-* [Azure DevOps Documentation][AzureDevOpsDocs]
-* [Microsoft Azure Documentation][MicrosoftAzureDocs]
-
-<!-- References -->
-
-<!-- Local -->
-[ProjectSetup]: <https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions>
-[CreateFromTemplate]: <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template>
-[GitHubDocs]: <https://docs.github.com/>
-[AzureDevOpsDocs]: <https://docs.microsoft.com/en-us/azure/devops/?view=azure-devops>
-[GitHubIssues]: <https://github.com/segraef/Template/issues>
-[Contributing]: CONTRIBUTING.md
-
-<!-- External -->
-[Az]: <https://img.shields.io/powershellgallery/v/Az.svg?style=flat-square&label=Az>
-[AzGallery]: <https://www.powershellgallery.com/packages/Az/>
-[PowerShellCore]: <https://github.com/PowerShell/PowerShell/releases/latest>
-
-<!-- Docs -->
-[MicrosoftAzureDocs]: <https://docs.microsoft.com/en-us/azure/>
-[PowerShellDocs]: <https://docs.microsoft.com/en-us/powershell/>
+This project is licensed under the MIT License - see the LICENSE file for details.

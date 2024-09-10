@@ -1,0 +1,74 @@
+name: "03 - release and terraform plan to: staging"
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Debug mode'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+
+permissions:
+  pull-requests: write  # required to create a PR
+  contents: write       # required to create release and branch
+  id-token: write 
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if running on sandbox branch
+        if: github.ref != 'refs/heads/sandbox'
+        run: |
+          echo "Error: This workflow can only be run from the sandbox branch."
+          exit 1
+          
+  create-version-and-release:
+    needs: check-branch
+    uses: ./.github/workflows/create-version-and-release.yml
+    with:
+      source_environment: "sandbox"
+      target_environment: "staging"
+      config_directory: "workload/terraform/microsoft365"
+      debug: ${{ inputs.debug }}
+
+  terraform-plan:
+    needs: create-version-and-release
+    uses: ./.github/workflows/terraform-plan.yml
+    with:
+      tf_cloud_organization: "deploymenttheory"
+      tf_workspace: "terraform-microsoft365-staging" 
+      target_environment: "staging"
+      debug: ${{ inputs.debug }}
+      config_directory: "workload/terraform/microsoft365"
+      release_version: release-${{ needs.create-version-and-release.outputs.new_version }}-to-staging
+    secrets:
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+
+  create-pr:
+    needs: [create-version-and-release, terraform-plan]
+    uses: ./.github/workflows/create-pr.yml
+    with:
+      target_environment: "staging"
+      release_version: release-${{ needs.create-version-and-release.outputs.new_version }}-to-staging
+      plan_id: ${{ needs.terraform-plan.outputs.plan_id }}
+      add: ${{ needs.terraform-plan.outputs.add }}
+      change: ${{ needs.terraform-plan.outputs.change }}
+      destroy: ${{ needs.terraform-plan.outputs.destroy }}
+      run_link: ${{ needs.terraform-plan.outputs.run_link }}
+      tf_workspace: "terraform-microsoft365-staging"
+
+  send-notification:
+    needs: [create-version-and-release, terraform-plan, create-pr]
+    if: always()
+    uses: ./.github/workflows/send-notification.yml
+    with:
+      environment: "staging"
+      result: ${{ needs.terraform-plan.result == 'success' && needs.create-pr.result == 'success' && 'success' || 'failure' }}
+      notification_channel: msteams
+      new_version: ${{ needs.create-version-and-release.outputs.new_version }}
+    secrets: inherit
