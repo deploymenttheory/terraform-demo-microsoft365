@@ -3,7 +3,7 @@ terraform {
   required_providers {
     microsoft365 = {
       source  = "deploymenttheory/microsoft365"
-      version = "~> v0.1.1-alpha"
+      version = "~> 0.1.1-alpha"
     }
   }
 }
@@ -118,5 +118,5 @@ variable "telemetry_optout" {
 variable "debug_mode" {
   description = "Flag to enable debug mode for the provider. When enabled, the provider will output additional debug information to the console to help diagnose issues. Can also be set using the `M365_DEBUG_MODE` environment variable."
   type        = bool
-  default     = false
+  default     = true
 }
