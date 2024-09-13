@@ -2,8 +2,8 @@
 terraform {
   required_providers {
     microsoft365 = {
-      source  = "deploymenttheory/microsoft365"
-      version = "~> 0.1.1-alpha"
+      source = "deploymenttheory/microsoft365"
+      version = "0.1.1-alpha"
     }
   }
 }
