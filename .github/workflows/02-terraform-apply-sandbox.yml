@@ -25,8 +25,8 @@ jobs:
     uses: ./.github/workflows/terraform-apply.yml
     with:
       tf_cloud_organization: "deploymenttheory"
-      tf_workspace: "terraform-jamfpro-sandbox"
-      config_directory: "workload/terraform/jamfpro"
+      tf_workspace: "terraform-microsoft365-sandbox"
+      config_directory: "workload/terraform/microsoft365"
       debug: true
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
