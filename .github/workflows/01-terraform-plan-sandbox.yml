@@ -33,11 +33,6 @@ permissions:
   id-token: write
   pull-requests: write
   
-permissions:
-  contents: write
-  id-token: write
-  pull-requests: write
-  
 jobs:
   branch-check:
     if: github.event_name == 'workflow_dispatch' # only need to check branch for manual triggers
