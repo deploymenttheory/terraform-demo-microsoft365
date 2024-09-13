@@ -5,7 +5,7 @@ resource "microsoft365_graph_beta_device_and_app_management_assignment_filter" "
   rule                              = "(device.manufacturer -eq \"thing\")"
   assignment_filter_management_type = "devices"
 
-  role_scope_tags = [8,9]
+  role_scope_tags = []
 
   timeouts = {
     create = "10s"
