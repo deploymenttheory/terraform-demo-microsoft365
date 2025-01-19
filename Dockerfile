@@ -6,8 +6,8 @@ COPY scripts/go.mod scripts/go.sum ./
 RUN go build -o validator main.go
 
 FROM golang:1.23.5-alpine3.21 as pr-updater
-WORKDIR /app
+WORKDIR /app/scripts/update_pr
 COPY scripts/go.mod scripts/go.sum ./
 RUN go mod download
-COPY scripts/update_pr/main.go .
-RUN go build -o pr-updater main.go
+COPY scripts/update_pr/ ./
+RUN go build -o /app/pr-updater .
