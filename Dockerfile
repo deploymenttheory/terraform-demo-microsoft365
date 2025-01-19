@@ -1,13 +1,23 @@
-FROM golang:1.23.5-alpine3.21 as branch-validator
-WORKDIR /app
-COPY scripts/branch_validator/main.go .
-COPY configuation/allowed_branch_prefixes.json /app/configuration/
-COPY scripts/go.mod scripts/go.sum ./
-RUN go build -o validator main.go
+FROM golang:1.23.5-alpine3.21 AS builder
 
-FROM golang:1.23.5-alpine3.21 as pr-updater
-WORKDIR /app/scripts/update_pr
-COPY scripts/go.mod scripts/go.sum ./
+# Build branch validator
+WORKDIR /build/branch_validator
+COPY scripts/branch_validator/go.mod scripts/branch_validator/go.sum ./
 RUN go mod download
-COPY scripts/update_pr/ ./
-RUN go build -o /app/pr-updater .
+COPY scripts/branch_validator/main.go .
+COPY configuation/allowed_branch_prefixes.json /build/branch_validator/configuration/
+RUN go build -o validator .
+
+# Build PR updater
+WORKDIR /build/pr_updater
+COPY scripts/update_pr/go.mod scripts/update_pr/go.sum ./
+RUN go mod download
+COPY scripts/update_pr/ .
+RUN go build -o pr-updater .
+
+# Final stage
+FROM alpine:3.21
+WORKDIR /app
+COPY --from=builder /build/branch_validator/validator .
+COPY --from=builder /build/pr_updater/pr-updater .
+COPY --from=builder /build/branch_validator/configuration/ ./configuration/
