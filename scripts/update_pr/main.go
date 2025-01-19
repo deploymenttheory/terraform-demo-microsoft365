@@ -12,7 +12,7 @@ func main() {
 	// Load configuration
 	cfg, err := config.Load()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error loading configuration: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error loading gh configuration: %v\n", err)
 		os.Exit(1)
 	}
 

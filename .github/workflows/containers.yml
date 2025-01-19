@@ -1,0 +1,44 @@
+name: "🏗️ Build Container Images"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/**'
+      - 'Dockerfile'
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3.3.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push branch validator image
+        uses: docker/build-push-action@v6.12.0
+        with:
+          context: .
+          target: branch-validator
+          push: true
+          tags: ghcr.io/${{ github.repository }}/branch-validator:latest
+
+      - name: Build and push PR updater image
+        uses: docker/build-push-action@v6.12.0
+        with:
+          context: .
+          target: pr-updater
+          push: true
+          tags: ghcr.io/${{ github.repository }}/pr-updater:latest
