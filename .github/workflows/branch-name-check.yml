@@ -1,0 +1,24 @@
+name: "Check branch name is compliant with conventional commits"
+run-name: "Branch Name Complicity Check"
+
+on:
+    workflow_call:
+        inputs:
+            branch-name:
+                required: true
+                type: string
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/${{ github.repository }}/python:latest
+      env:
+        BRANCH_NAME: ${{ inputs.branch-name }} 
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4.2.2
+
+      - name: run branch check
+        run: python .github/scripts/branch_name_check.py

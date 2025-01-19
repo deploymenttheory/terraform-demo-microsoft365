@@ -1,0 +1,44 @@
+{
+  "allowed_prefixes": {
+    "feature": {
+      "description": "New feature or enhancement",
+      "pattern": "feat/"
+    },
+    "fix": {
+      "description": "Fix for a bug",
+      "pattern": "fix/"
+    },
+    "hotfix": {
+      "description": "Urgent fix for production issue",
+      "pattern": "hotfix/"
+    },
+    "release": {
+      "description": "Release branch",
+      "pattern": "release/"
+    },
+    "chore": {
+      "description": "Maintenance tasks, dependencies, refactoring",
+      "pattern": "chore/"
+    },
+    "docs": {
+      "description": "Documentation updates",
+      "pattern": "docs/"
+    },
+    "test": {
+      "description": "Test additions or modifications",
+      "pattern": "test/"
+    },
+    "ci": {
+      "description": "CI/CD related changes",
+      "pattern": "ci/"
+    },
+    "style": {
+      "description": "Code style/formatting changes",
+      "pattern": "style/"
+    },
+    "revert": {
+      "description": "Revert previous changes",
+      "pattern": "revert/"
+    }
+  }
+}

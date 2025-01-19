@@ -1,0 +1,87 @@
+name: Demo | Workflow 2 - Apply Targetted at Staging from Main
+run-name: Merge Triggered Apply of Main to Staging
+
+on:
+  pull_request:
+
+    # When a PR is closed
+    types:
+      [closed]
+
+    # if the target is main
+    branches:
+      - main
+
+    # if .tf files in this directory are part of the diff.
+    paths:
+      - 'workload/terraform/jamfpro/*.tf'
+
+
+jobs:
+
+  terraform-upload-plan-apply:
+
+    # If the closure type was merged (not rejected)
+    if: github.event.pull_request.merged == true
+
+    environment: 'staging'
+    runs-on: ubuntu-latest
+    env:
+      TF_API_KEY: ${{ secrets.TF_API_KEY }}
+      TF_CLOUD_ORGANIZATION: ${{ vars.TF_CLOUD_ORG }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      - name: Upload configuration to tf cloud
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.1
+        id: upload-config
+        with:
+          token: ${{ secrets.TF_API_KEY }}
+          workspace: ${{ vars.TF_WORKSPACE }}
+          directory: "workload/terraform/jamfpro"
+
+
+      - name: Terraform plan
+        id: terraform-plan
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.1
+        with:
+          token: ${{ secrets.TF_API_KEY }}
+          workspace: ${{ vars.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload-config.outputs.configuration_version_id }}
+
+
+      - name: Terraform Apply
+        id: terraform-apply
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.3.1
+        with:
+          token: ${{ secrets.TF_API_KEY }}
+          run: ${{ steps.terraform-plan.outputs.run_id }}
+
+
+      - name: Save outputs to file
+        run: |
+          cat << EOF > ${{ vars.ARTIFACT_FN }}
+          {
+            "status": "${{ steps.terraform-apply.outputs.status }}"
+          }
+          EOF
+
+
+      - name: Upload outputs json file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ vars.APPLY_OUTPUT_ARTIFACT_NAME }}
+          path: ${{ vars.ARTIFACT_FN }}
+          retention-days: 0
+
+
+  update-pr:
+    name: Deposit plan output on trigger pr
+    needs: terraform-upload-plan-apply
+    uses: ./.github/workflows/update-pr.yml
+    with:
+      artifact-name: ${{ vars.APPLY_OUTPUT_ARTIFACT_NAME }}
+      target-pr-number: ${{ github.event.pull_request.number }}

@@ -1,0 +1,119 @@
+name: Demo | Workflow 1 - Plan Targetted at Staging
+run-name: Speculative Plan | Target - Staging
+
+on:
+  # Manual trigger options - debug only.
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target RTL Environment"
+        required: true
+        type: choice
+        options:
+          - sandbox
+          - staging
+          - production
+  
+  pull_request:
+    types: [opened, reopened, synchronize] # Synchronize is when a PR is updated by new commits.
+    
+    # if Target branch is Main
+    branches:
+      - main
+
+    # if .tf files in this directory are part of the diff.
+    paths:
+      - 'workload/terraform/jamfpro/*.tf'
+
+
+jobs:
+
+  check-branch-name:
+    if: github.event_name != 'workflow_dispatch'
+    uses: ./.github/workflows/branch-name-check.yml
+    with:
+      branch-name: ${{ github.event.pull_request.head.ref }} # // TODO make this dynamic incase it's manually triggered?
+  
+
+  terraform-upload-config-and-plan:
+    needs: check-branch-name
+    environment: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'staging' }}
+    runs-on: ubuntu-latest
+    env:
+      TF_API_KEY: ${{ secrets.TF_API_KEY }}
+      TF_CLOUD_ORGANIZATION: ${{ vars.TF_CLOUD_ORG }}
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      - name: Upload configuration to tf cloud
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.1
+        id: upload-config
+        with:
+          token: ${{ secrets.TF_API_KEY }}
+          workspace: ${{ vars.TF_WORKSPACE }}
+          directory: "workload/terraform/jamfpro"
+          speculative: true
+
+
+      - name: Terraform plan
+        id: terraform-plan
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.1
+        with:
+          token: ${{ secrets.TF_API_KEY }}
+          workspace: ${{ vars.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload-config.outputs.configuration_version_id }}
+          plan_only: true
+
+
+      - name: Get plan output
+        id: get-plan-output
+        uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.1
+        with:
+          token: ${{ secrets.TF_API_KEY }}
+          plan: ${{ steps.terraform-plan.outputs.plan_id }}
+
+
+      - name: Save run info to json file
+        run: |
+          cat << EOF > ${{ vars.ARTIFACT_FN }}
+          {
+            "plan_response": {
+              "status": "${{ steps.terraform-plan.outputs.status }}",
+              "run_id": "${{ steps.terraform-plan.outputs.run_id }}",
+              "run_status": "${{ steps.terraform-plan.outputs.run_status }}",
+              "run_message": "${{ steps.terraform-plan.outputs.run_message }}",
+              "run_link": "${{ steps.terraform-plan.outputs.run_link }}",
+              "plan_id": "${{ steps.terraform-plan.outputs.plan_id }}",
+              "plan_status": "${{ steps.terraform-plan.outputs.plan_status }}",
+              "configuration_version_id": "${{ steps.terraform-plan.outputs.configuration_version_id }}"
+            },
+            "plan_output": {
+              "status": "${{ steps.get-plan-output.outputs.status }}",
+              "add": "${{ steps.get-plan-output.outputs.add }}",
+              "change": "${{ steps.get-plan-output.outputs.change }}",
+              "destroy": "${{ steps.get-plan-output.outputs.destroy }}",
+              "plan_id": "${{ steps.get-plan-output.outputs.status }}",
+              "plan_status": "${{ steps.get-plan-output.outputs.status }}"
+            }
+          } 
+          EOF
+
+      - name: Upload plan output json artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ vars.PLAN_OUTPUT_ARTIFACT_NAME }}
+          path: ${{ vars.ARTIFACT_FN }}
+          retention-days: 0
+        
+
+  update-pr:
+    name: Deposit plan output on trigger pr
+    needs: terraform-upload-config-and-plan
+    uses: ./.github/workflows/update-pr.yml
+    with:
+      artifact-name: ${{ vars.PLAN_OUTPUT_ARTIFACT_NAME }}
+      target-pr-number: ${{ github.event.pull_request.number }}
