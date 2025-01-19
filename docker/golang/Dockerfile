@@ -2,7 +2,6 @@ FROM golang:1.23.5-alpine3.21 AS builder
 
 # Build branch validator
 WORKDIR /build/branch_validator
-COPY scripts/branch_validator/go.mod scripts/branch_validator/go.sum ./
 RUN go mod download
 COPY scripts/branch_validator/main.go .
 COPY configuation/allowed_branch_prefixes.json /build/branch_validator/configuration/
