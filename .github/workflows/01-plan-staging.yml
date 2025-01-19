@@ -1,5 +1,5 @@
-name: Demo | Workflow 1 - Plan Targetted at Staging
-run-name: Speculative Plan | Target - Staging
+name: '🔍 | Workflow 1 - TF Plan Targetted at Staging'
+run-name: '📊 TF Speculative Plan | Target - Staging'
 
 on:
   # Manual trigger options - debug only.

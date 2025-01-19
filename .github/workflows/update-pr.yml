@@ -1,4 +1,4 @@
-name: Add PR Comment
+name: '💬 Add PR Comment'
 
 on:
   workflow_call:
@@ -21,24 +21,26 @@ jobs:
       contents: write
       
     container:
-      image: ghcr.io/${{ github.repository }}/python:latest
+      image: ghcr.io/${{ github.repository }}/go-utils-tf-microsoft365:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         
       
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Download artifact
         id: download-artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4.1.8
         with:
           name: ${{ inputs.artifact-name }}
 
-      - name: Run pr update python utility
-        run: python .github/scripts/update_pr.py
+      - name: Run PR updater utility
+        run: |
+          ./pr-updater
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{vars.ARTIFACT_FN}}
-          TARGET_PR_NUMBER: ${{ inputs.target-pr-number}}
+          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{ vars.ARTIFACT_FN }}
+          TARGET_PR_NUMBER: ${{ inputs.target-pr-number }}
