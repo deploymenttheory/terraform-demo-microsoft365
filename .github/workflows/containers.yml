@@ -33,4 +33,4 @@ jobs:
           context: .
           file: ./docker/golang/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/go-utils:latest
+          tags: ghcr.io/${{ github.repository }}/go-utils-tf-microsoft365:latest
