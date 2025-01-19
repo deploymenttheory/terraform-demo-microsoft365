@@ -1,4 +1,4 @@
-name: Add Release Comment
+name: "📝 Add Release Comment"
 
 on:
   workflow_call:
@@ -6,7 +6,6 @@ on:
       artifact-name:
         required: true
         type: string
-      
       git-tag:
         required: true
         type: string
@@ -18,25 +17,21 @@ jobs:
       packages: read
       pull-requests: write
       contents: write
-      
+    
     container:
-      image: ghcr.io/${{ github.repository }}/pr-updater:latest
+      image: ghcr.io/${{ github.repository }}/go-utils:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REPO: ${{ github.repository }}
         
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
       - name: Download artifact
         id: download-artifact
         uses: actions/download-artifact@v4.1.8
         with:
           name: ${{ inputs.artifact-name }}
 
-      - name: Update PR with release info
-        run: /app/pr-updater
+      - name: Update PR
         env:
           ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{ vars.ARTIFACT_FN }}
-          TARGET_PR_NUMBER: ${{ inputs.git-tag }}
+        run: ./pr-updater

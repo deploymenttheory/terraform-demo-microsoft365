@@ -21,3 +21,6 @@ WORKDIR /app
 COPY --from=builder /build/branch_validator/validator .
 COPY --from=builder /build/pr_updater/pr-updater .
 COPY --from=builder /build/branch_validator/configuration/ ./configuration/
+
+# Default command can be overridden at runtime
+CMD ["./validator"]

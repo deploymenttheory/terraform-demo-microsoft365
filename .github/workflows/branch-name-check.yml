@@ -12,10 +12,9 @@ jobs:
   check-branch-name:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}/go-utils:branch-validator
+      image: ghcr.io/${{ github.repository }}/go-utils:latest
       env:
         BRANCH_NAME: ${{ inputs.branch-name }}
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4.2.2
+      - name: Run branch validator
+        run: ./validator
