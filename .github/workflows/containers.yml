@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'scripts/**'
-      - 'Dockerfile'
+      - '.docker/golang'
   workflow_dispatch:
 
 jobs:
