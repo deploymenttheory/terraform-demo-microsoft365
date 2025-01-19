@@ -1,4 +1,4 @@
-module github.com/deploymenttheory/terraform-demo-microsoft365/scripts
+module github.com/deploymenttheory/terraform-demo-microsoft365/scripts/update_pr
 
 go 1.22.5
 
