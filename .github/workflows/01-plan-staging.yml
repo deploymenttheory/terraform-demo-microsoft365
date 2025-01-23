@@ -50,7 +50,7 @@ jobs:
 
 
       - name: Upload configuration to tf cloud
-        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.1
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.2
         id: upload-config
         with:
           token: ${{ secrets.TF_API_KEY }}
@@ -61,7 +61,7 @@ jobs:
 
       - name: Terraform plan
         id: terraform-plan
-        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.1
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
         with:
           token: ${{ secrets.TF_API_KEY }}
           workspace: ${{ vars.TF_WORKSPACE }}
@@ -71,7 +71,7 @@ jobs:
 
       - name: Get plan output
         id: get-plan-output
-        uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.1
+        uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.2
         with:
           token: ${{ secrets.TF_API_KEY }}
           plan: ${{ steps.terraform-plan.outputs.plan_id }}
