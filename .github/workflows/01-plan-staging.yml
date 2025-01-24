@@ -40,7 +40,7 @@ jobs:
     environment: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'staging' }}
     runs-on: ubuntu-latest
     env:
-      TF_API_KEY: ${{ secrets.TF_API_KEY }}
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       TF_CLOUD_ORGANIZATION: ${{ vars.TF_CLOUD_ORG }}
 
     steps:
@@ -53,7 +53,7 @@ jobs:
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.2
         id: upload-config
         with:
-          token: ${{ secrets.TF_API_KEY }}
+          token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
           directory: "workload/terraform/jamfpro"
           speculative: true
@@ -63,7 +63,7 @@ jobs:
         id: terraform-plan
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.2
         with:
-          token: ${{ secrets.TF_API_KEY }}
+          token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
           configuration_version: ${{ steps.upload-config.outputs.configuration_version_id }}
           plan_only: true
@@ -73,7 +73,7 @@ jobs:
         id: get-plan-output
         uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.3.2
         with:
-          token: ${{ secrets.TF_API_KEY }}
+          token: ${{ secrets.TF_API_TOKEN }}
           plan: ${{ steps.terraform-plan.outputs.plan_id }}
 
 
