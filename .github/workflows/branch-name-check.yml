@@ -12,7 +12,7 @@ jobs:
   check-branch-name:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}/o-utils-tf-microsoft365:latest
+      image: ghcr.io/${{ github.repository }}/go-utils-tf-microsoft365:latest
       env:
         BRANCH_NAME: ${{ inputs.branch-name }}
     steps:
