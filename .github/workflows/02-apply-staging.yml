@@ -20,10 +20,8 @@ on:
 jobs:
 
   terraform-upload-plan-apply:
-
     # If the closure type was merged (not rejected)
     if: github.event.pull_request.merged == true
-
     environment: 'staging'
     runs-on: ubuntu-latest
     env:
