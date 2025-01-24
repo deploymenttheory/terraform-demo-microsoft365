@@ -1,4 +1,4 @@
-name: Send Notification
+name: '📢 Send Notification'
 
 on:
   workflow_call:
