@@ -9,21 +9,19 @@ import (
 )
 
 func main() {
-	// Load configuration
+
 	cfg, err := config.Load()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error loading gh configuration: %v\n", err)
 		os.Exit(1)
 	}
 
-	// Parse repository owner and name
 	owner, repo, err := cfg.ParseRepo()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Invalid repository format: %v\n", err)
 		os.Exit(1)
 	}
 
-	// Initialize GitHub client
 	gh := github.NewClient(cfg)
 
 	// Update the PR with the artifact content

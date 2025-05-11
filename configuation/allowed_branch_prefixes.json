@@ -39,6 +39,10 @@
     "revert": {
       "description": "Revert previous changes",
       "pattern": "revert/"
+    },
+    "refactor": {
+      "description": "Refactor of existing codebase",
+      "pattern": "refactor/"
     }
   }
 }

@@ -74,22 +74,19 @@ func (c *Client) addComment(prID string, body string) error {
 
 // UpdatePRWithText adds a comment to the PR with formatted JSON content
 func (c *Client) UpdatePRWithText(owner, repo, prNumber, artifactPath string) error {
-	// Get PR ID first
+
 	prID, err := c.getPullRequestID(owner, repo, prNumber)
 	if err != nil {
 		return fmt.Errorf("failed to get PR ID: %v", err)
 	}
 
-	// Read and format the artifact content
 	content, err := os.ReadFile(artifactPath)
 	if err != nil {
 		return fmt.Errorf("failed to read artifact file: %v", err)
 	}
 
-	// Wrap content in markdown format
 	comment := utils.WrapJSONMarkdown(string(content))
 
-	// Add the comment
 	err = c.addComment(prID, comment)
 	if err != nil {
 		return fmt.Errorf("failed to add comment: %v", err)

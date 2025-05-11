@@ -19,25 +19,22 @@ type Config struct {
 }
 
 func main() {
-	// Get branch name from environment
+
 	branchName := os.Getenv("BRANCH_NAME")
 	if branchName == "" {
 		exitWithError("BRANCH_NAME environment variable is empty")
 	}
 
-	// Read and parse configuration
 	config, err := loadConfig("./configuration/allowed_branch_prefixes.json")
 	if err != nil {
-		exitWithError("Failed to load configuration: %v", err)
+		exitWithError("Failed to load allowed branch schema: %v", err)
 	}
 
-	// Validate branch name
 	if valid, prefix := validateBranchName(branchName, config); valid {
 		fmt.Printf("Branch name is valid: prefix:%s, name: %s\n", prefix.Pattern, branchName)
 		os.Exit(0)
 	}
 
-	// If we get here, no valid prefix was found
 	exitWithError("branch name prefix is invalid: %s\nAllowed prefixes: %s",
 		branchName,
 		getAllowedPrefixesString(config))
