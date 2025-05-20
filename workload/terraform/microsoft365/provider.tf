@@ -14,7 +14,6 @@ provider "microsoft365" {
     client_certificate_password  = var.client_certificate_password
     send_certificate_chain       = var.send_certificate_chain
     username                     = var.username
-    password                     = var.password
     disable_instance_discovery   = var.disable_instance_discovery
     additionally_allowed_tenants = var.additionally_allowed_tenants
     redirect_url                 = var.redirect_url
