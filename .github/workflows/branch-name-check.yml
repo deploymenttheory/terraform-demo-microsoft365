@@ -1,20 +1,54 @@
 name: "🌿 Check branch name is compliant with conventional commits"
-run-name: "Branch Name Compliance Check"
+
+permissions:
+  contents: read
 
 on:
-  workflow_call:
-    inputs:
-      branch-name:
-        required: true
-        type: string
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
 
 jobs:
-  check-branch-name:
+  validate-pr-title:
+    name: '✅ Validate PR Title'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository }}/go-utils-tf-microsoft365:latest
-      env:
-        BRANCH_NAME: ${{ inputs.branch-name }}
     steps:
-      - name: Run branch validator
-        run: ./validator
+      - name: Check PR Title
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PATTERN="^((feat|fix|docs|style|refactor|test|chore|build|ci|perf)(\(.+\))?: .+|dependabot.*)$"
+          
+          if ! echo "$PR_TITLE" | grep -qE "$PATTERN"; then
+            echo "❌ ERROR: Invalid PR title format"
+            echo ""
+            echo "Got PR title: $PR_TITLE"
+            echo ""
+            echo "PR titles must:"
+            echo "1. Start with one of these prefixes (lowercase only):"
+            echo "   - feat     (for new features)"
+            echo "   - fix      (for bug fixes)"
+            echo "   - docs     (for documentation)"
+            echo "   - style    (for formatting)"
+            echo "   - refactor (for code restructuring)"
+            echo "   - test     (for adding tests)"
+            echo "   - chore    (for maintenance)"
+            echo "   - build    (for build system)"
+            echo "   - ci       (for CI/CD)"
+            echo "   - perf     (for performance)"
+            echo ""
+            echo "2. Optionally include a scope in parentheses after the type"
+            echo ""
+            echo "3. Include a description after a colon and space"
+            echo ""
+            echo "Examples:"
+            echo "✅ feat: add new resource"
+            echo "✅ feat(api): add new endpoint"
+            echo "✅ fix: resolve connection timeout"
+            echo "✅ fix(database): fix query performance"
+            echo "✅ dependabot: bump lodash from 4.17.20 to 4.17.21"
+            echo ""
+            echo "❌ Feat: add new resource (uppercase first letter is not allowed)"
+            echo "❌ FIX: resolve issue (uppercase is not allowed)"
+            exit 1
+          fi
+          
+          echo "✅ PR title '$PR_TITLE' follows the conventional commit format and is compatible with the release-please"

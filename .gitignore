@@ -13,3 +13,5 @@
 #
 **/.terraform/
 *.terraform.lock.hcl
+*.tfvars
+sandbox_env_vars.sh

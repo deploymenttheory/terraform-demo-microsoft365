@@ -36,7 +36,7 @@ jobs:
         with:
           token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
-          directory: "workload/terraform/jamfpro"
+          directory: "workload/terraform/microsoft365"
 
 
       - name: Terraform plan

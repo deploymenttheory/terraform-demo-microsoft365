@@ -1,5 +1,12 @@
+# Entra ID provider
+provider "azuread" {
+  client_id                   = var.client_id
+  client_certificate_path     = var.client_certificate
+  client_certificate_password = var.client_certificate_password
+  tenant_id                   = var.tenant_id
+}
 
-# Example provider
+# Example m365 provider
 provider "microsoft365" {
   cloud            = var.cloud
   tenant_id        = var.tenant_id

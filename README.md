@@ -7,10 +7,12 @@ manage as code microsoft tools and services as code.
 
 This lab has the following dependancies
 
-- a Microsoft 365 tenant
-- terraform cloud
-- github with github actions
+- a minimum of 1 Microsoft 365 tenant, but this demo is designed to be used with 3. One sandbox tenant and two route to live tenants.
+- terraform cloud for remote state management
+- github with github actions for CI/CD
 - access to create various enterprise app types with Entra ID to test different authentication methods
+- relevant m365 licensing for the demo
+- enterprise app defined within Entra ID for authentication with the correct graph permissions defined.
 
 ## Getting Started
 
@@ -92,11 +94,14 @@ To use Terraform Cloud as a backend for your local development environment, foll
 
 2. **Create an organization and workspace in Terraform Cloud**:
 
-   a. **Sign up and create an organization**:
+You can either create a new organization and workspace, use an existing one or use the supplied script to build the tfc project, workspace and variable sets.
+
+   1. **Sign up and create an organization**:
       - Go to [app.terraform.io](https://app.terraform.io) and sign up for an account if you haven't already
       - After signing up, create a new tf cloud organization (e.g., "deploymenttheory") or use an existing one
+2a. 
 
-   b. **Create and configure workspaces**:
+  2b. **Create and configure workspaces**:
       - In your organization, navigate to "Workspaces" and click "New Workspace"
       - Choose "CLI-driven workflow" for local Terraform execution
       - Name your workspace (e.g., "terraform-demo-microsoft365-sandbox")
@@ -230,6 +235,109 @@ To use Terraform Cloud as a backend for your local development environment, foll
    terraform plan
    terraform apply
    ```
+### Setting up the Sandbox Environment Variables
+
+To set up the sandbox environment variables, run the following script:
+
+```bash
+#!/bin/bash
+
+# Colors for better readability
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Function to display section headers
+section() {
+  printf "\n%s=== %s ===%s\n" "$BLUE" "$1" "$NC"
+}
+
+# Function to display a variable (mask if sensitive)
+show_var() {
+  local var_name=$1
+  local is_sensitive=${2:-false}
+  
+  if [ "$is_sensitive" = true ]; then
+    printf "%s%s%s=%s********%s (masked for security)\n" "$GREEN" "$var_name" "$NC" "$YELLOW" "$NC"
+  else
+    # Use printf and parameter expansion to display the variable value
+    printf "%s%s%s=%s%s%s\n" "$GREEN" "$var_name" "$NC" "$YELLOW" "${!var_name}" "$NC"
+  fi
+}
+
+# Set the Terraform Cloud API token
+export TFE_ORG_TOKEN=""
+
+# Set the terraform cloud token id for cli access with sandbox
+export TF_TOKEN_app_terraform_io=""
+
+# Set Microsoft 365 variables
+export M365_TENANT_ID=""
+export M365_AUTH_METHOD="" # or "certificate"
+export M365_CLIENT_ID=""
+export M365_CLIENT_SECRET=""
+# If using certificate auth
+export M365_CLIENT_CERTIFICATE_FILE_PATH="/some/path/to/your/cert.key"
+export M365_CLIENT_CERTIFICATE_PASSWORD="cert_password"
+
+# Set common variables
+export M365_CLOUD="public"
+export TF_LOG="DEBUG"
+export M365_DEBUG_MODE="false"
+export M365_TELEMETRY_OPTOUT="true"
+export TFE_PARALLELISM="1"
+
+# Display all set variables
+clear
+section "Terraform Cloud Authentication"
+show_var "TFE_ORG_TOKEN" true
+show_var "TF_TOKEN_app_terraform_io" true
+
+section "Microsoft 365 Authentication Variables"
+show_var "M365_TENANT_ID" true
+show_var "M365_AUTH_METHOD"
+show_var "M365_CLIENT_ID" true
+show_var "M365_CLIENT_SECRET" true
+show_var "M365_CLIENT_CERTIFICATE_FILE_PATH" true
+show_var "M365_CLIENT_CERTIFICATE_PASSWORD" true
+
+section "Microsoft 365 Common Variables"
+show_var "M365_CLOUD"
+show_var "TF_LOG"
+show_var "M365_DEBUG_MODE"
+show_var "M365_TELEMETRY_OPTOUT"
+show_var "TFE_PARALLELISM"
+
+section "Environment Variables Set Successfully"
+printf "%sYou can now run Terraform commands for the sandbox environment.%s\n" "$GREEN" "$NC"
+printf "%sExample: terraform init && terraform plan%s\n" "$YELLOW" "$NC"
+
+# Display current directory
+printf "\n%sCurrent directory:%s %s\n" "$BLUE" "$NC" "$(pwd)"
+
+# Verify Terraform Cloud token is set correctly
+if [ -n "$TF_TOKEN_app_terraform_io" ]; then
+  printf "\n%s✓ Terraform Cloud token is set%s\n" "$GREEN" "$NC"
+else
+  printf "\n%s✗ Terraform Cloud token is NOT set%s\n" "$RED" "$NC"
+fi
+
+# Create/update Terraform CLI config file to ensure token is recognized
+mkdir -p ~/.terraform.d
+cat > ~/.terraform.d/credentials.tfrc.json << EOF
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "$TF_TOKEN_app_terraform_io"
+    }
+  }
+}
+EOF
+
+printf "\n%s✓ Terraform credentials file updated at ~/.terraform.d/credentials.tfrc.json%s\n" "$GREEN" "$NC"
+```
 
 The `cloud` block is the recommended approach for new configurations with Terraform v1.1.0 and later, replacing the older `backend "remote"` configuration. With this setup, your state will be stored in Terraform Cloud while you can still run Terraform commands locally.
 
