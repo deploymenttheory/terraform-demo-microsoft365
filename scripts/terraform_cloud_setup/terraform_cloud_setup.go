@@ -296,7 +296,7 @@ func (c *Client) createEnvironmentVars(orgName string, environments []Environmen
 		envVars := []tfe.Variable{
 			{
 				Key:         "TF_WORKSPACE",
-				Value:       env.Name,
+				Value:       fmt.Sprintf("microsoft365-%s", env.Name),
 				Category:    tfe.CategoryEnv,
 				Sensitive:   false,
 				HCL:         false,
