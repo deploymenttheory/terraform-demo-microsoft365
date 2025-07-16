@@ -61,7 +61,8 @@ jobs:
 
       - name: Save outputs to file
         run: |
-          cat << EOF > ${{ vars.ARTIFACT_FN }}
+          cat << EOF > ${{ vars.TF_PLAN_OUTPUT }}
+
           {
             "status": "${{ steps.terraform-apply.outputs.status }}"
           }
@@ -72,7 +73,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ vars.APPLY_OUTPUT_ARTIFACT_NAME }}
-          path: ${{ vars.ARTIFACT_FN }}
+          path: ${{ vars.TF_PLAN_OUTPUT }}
+
           retention-days: 0
 
 
