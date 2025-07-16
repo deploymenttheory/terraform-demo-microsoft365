@@ -18,11 +18,11 @@ on:
       
   # Also trigger on push to main (catches squash merges)
   # Even with branch protection, squash merges appear as pushes to GitHub Actions
-  push:
-    branches:
-      - main
-    paths:
-      - 'workload/terraform/microsoft365/*.tf'
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'workload/terraform/microsoft365/*.tf'
 
 
 jobs:
