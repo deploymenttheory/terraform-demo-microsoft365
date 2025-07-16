@@ -535,7 +535,7 @@ func (c *Client) createWorkspaceAuthVars(orgName string, environments []Environm
 		// Define workspace-specific auth variables
 		authVars := []tfe.Variable{
 			{
-				Key:         "M365_TENANT_ID",
+				Key:         "tenant_id",
 				Value:       "",
 				Category:    tfe.CategoryEnv,
 				Sensitive:   true,
@@ -543,7 +543,7 @@ func (c *Client) createWorkspaceAuthVars(orgName string, environments []Environm
 				Description: "Microsoft 365 tenant ID",
 			},
 			{
-				Key:         "M365_AUTH_METHOD",
+				Key:         "auth_method",
 				Value:       "",
 				Category:    tfe.CategoryEnv,
 				Sensitive:   false,
@@ -551,7 +551,7 @@ func (c *Client) createWorkspaceAuthVars(orgName string, environments []Environm
 				Description: "Authentication method for Microsoft 365",
 			},
 			{
-				Key:         "M365_CLIENT_ID",
+				Key:         "client_id",
 				Value:       "",
 				Category:    tfe.CategoryEnv,
 				Sensitive:   true,
@@ -559,7 +559,7 @@ func (c *Client) createWorkspaceAuthVars(orgName string, environments []Environm
 				Description: "Microsoft 365 client ID",
 			},
 			{
-				Key:         "M365_CLIENT_SECRET",
+				Key:         "client_secret",
 				Value:       "",
 				Category:    tfe.CategoryEnv,
 				Sensitive:   true,
@@ -567,7 +567,7 @@ func (c *Client) createWorkspaceAuthVars(orgName string, environments []Environm
 				Description: "Client secret for Microsoft 365 authentication",
 			},
 			{
-				Key:         "M365_CLIENT_CERTIFICATE_FILE_PATH",
+				Key:         "client_certificate_file_path",
 				Value:       "",
 				Category:    tfe.CategoryEnv,
 				Sensitive:   true,
@@ -575,7 +575,7 @@ func (c *Client) createWorkspaceAuthVars(orgName string, environments []Environm
 				Description: "Path to client certificate file",
 			},
 			{
-				Key:         "M365_CLIENT_CERTIFICATE_PASSWORD",
+				Key:         "client_certificate_password",
 				Value:       "",
 				Category:    tfe.CategoryEnv,
 				Sensitive:   true,

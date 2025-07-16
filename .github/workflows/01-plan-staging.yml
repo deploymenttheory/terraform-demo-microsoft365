@@ -77,9 +77,9 @@ jobs:
           plan: ${{ steps.terraform-plan.outputs.plan_id }}
 
 
-      - name: Save run info to json file
+      - name: Save tf plan output info to json file
         run: |
-          cat << EOF > ${{ vars.ARTIFACT_FN }}
+          cat << EOF > ${{ vars.TF_PLAN_OUTPUT }}
           {
             "plan_response": {
               "status": "${{ steps.terraform-plan.outputs.status }}",
