@@ -17,7 +17,7 @@ jobs:
     - uses: actions/create-github-app-token@v2.0.6
       id: app-token
       with:
-        app-id: ${{ vars.RPM_APP_ID }}
+        app-id: ${{ secrets.RPM_APP_ID }}
         private-key: ${{ secrets.RPM_APP_PRIVATE_KEY }}
 
     - uses: googleapis/release-please-action@v4
