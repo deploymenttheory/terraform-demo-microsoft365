@@ -6,6 +6,12 @@ permissions:
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
+  workflow_call:
+    inputs:
+      branch-name:
+        required: true
+        type: string
+        description: "The branch name to validate"
 
 jobs:
   validate-pr-title:
@@ -14,7 +20,13 @@ jobs:
     steps:
       - name: Check PR Title
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
+          # Get the PR title - either from the PR event or from the input parameter
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            PR_TITLE="${{ github.event.pull_request.title }}"
+          else
+            PR_TITLE="${{ inputs.branch-name }}"
+          fi
+          
           PATTERN="^((feat|fix|docs|style|refactor|test|chore|build|ci|perf)(\(.+\))?: .+|dependabot.*)$"
           
           if ! echo "$PR_TITLE" | grep -qE "$PATTERN"; then

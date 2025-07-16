@@ -103,7 +103,7 @@ jobs:
           EOF
 
       - name: Upload plan output json artifact
-        uses: actions/upload-artifact@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.6.2
+        uses: actions/upload-artifact@v4.6.2 # v4.6.2
         with:
           name: ${{ vars.PLAN_OUTPUT_ARTIFACT_NAME }}
           path: ${{ vars.ARTIFACT_FN }}
