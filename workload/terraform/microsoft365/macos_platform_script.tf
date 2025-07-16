@@ -13,6 +13,19 @@
 #   execution_frequency           = "PT1H" # ISO 8601 duration format (e.g., P1D for 1 day, PT1H for 1 hour)
 #   retry_count                   = 3
 
+#   assignments = {
+#     all_devices = false
+#     all_users   = false
+
+#     include_group_ids = [
+#       local.all_macos_laptops_group_id
+#     ]
+
+#     exclude_group_ids = [
+#       local.all_macos_intel_devices_group_id
+#     ]
+#   }
+
 #   # Role scope tag IDs (optional)
 #   role_scope_tag_ids = ["0"]
 

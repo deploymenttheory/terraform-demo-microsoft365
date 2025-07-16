@@ -55,7 +55,7 @@ jobs:
         with:
           token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
-          directory: "workload/terraform/microsoft365"
+          directory: "workload/terraform/microsoft365" # workload/terraform/microsoft365 defined in tfc workspace
           speculative: true
 
 
@@ -77,9 +77,9 @@ jobs:
           plan: ${{ steps.terraform-plan.outputs.plan_id }}
 
 
-      - name: Save run info to json file
+      - name: Save tf plan output info to json file
         run: |
-          cat << EOF > ${{ vars.ARTIFACT_FN }}
+          cat << EOF > ${{ vars.TF_PLAN_OUTPUT }}
           {
             "plan_response": {
               "status": "${{ steps.terraform-plan.outputs.status }}",
@@ -103,17 +103,17 @@ jobs:
           EOF
 
       - name: Upload plan output json artifact
-        uses: actions/upload-artifact@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.6.2
+        uses: actions/upload-artifact@v4.6.2 # v4.6.2
         with:
-          name: ${{ vars.PLAN_OUTPUT_ARTIFACT_NAME }}
-          path: ${{ vars.ARTIFACT_FN }}
+          name: ${{ vars.TF_PLAN_OUTPUT_ARTIFACT_NAME }}
+          path: ${{ vars.TF_PLAN_OUTPUT }}
           retention-days: 0
         
 
   update-pr:
-    name: Deposit plan output on trigger pr
+    name: Add tf plan output to PR
     needs: terraform-upload-config-and-plan
     uses: ./.github/workflows/update-pr.yml
     with:
-      artifact-name: ${{ vars.PLAN_OUTPUT_ARTIFACT_NAME }}
+      artifact-name: ${{ vars.TF_PLAN_OUTPUT_ARTIFACT_NAME }}
       target-pr-number: ${{ github.event.pull_request.number }}
