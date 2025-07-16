@@ -30,7 +30,7 @@ jobs:
 
   check-branch-name:
     if: github.event_name != 'workflow_dispatch'
-    uses: ".github/workflows/branch-name-check.yml"
+    uses: ./.github/workflows/branch-name-check.yml
     with:
       branch-name: ${{ github.event.pull_request.head.ref }}
   
