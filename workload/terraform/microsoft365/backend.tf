@@ -1,10 +1,10 @@
-// set terraform cloud organization and workspaceterraform
+// set terraform cloud organization and workspaces
 terraform {
 
   required_providers {
     microsoft365 = {
       source  = "deploymenttheory/microsoft365"
-      version = "0.20.0-alpha"
+      version = "0.21.2-alpha"
     }
 
     azuread = {

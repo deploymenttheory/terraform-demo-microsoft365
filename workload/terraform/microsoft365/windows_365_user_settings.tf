@@ -1,4 +1,4 @@
-# resource "microsoft365_graph_beta_windows_365_user_setting" "example" {
+# resource "microsoft365_graph_beta_windows_365_user_setting" "windows_365_user_settings" {
 #   display_name         = "Example Cloud PC User Setting"
 #   local_admin_enabled  = true
 #   reset_enabled        = true
@@ -25,7 +25,7 @@
 
 #   assignments = [
 #     {
-#       group_id = "af5dbc68-0ee3-485c-b85c-e27bbfff44c2" # Replace with a real group ID
+#       group_id = local.cloud_pc_group_id
 #     }
 #   ]
 # } 

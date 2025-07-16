@@ -23,7 +23,7 @@ on:
 
     # if .tf files in this directory are part of the diff.
     paths:
-      - 'workload/terraform/jamfpro/*.tf'
+      - 'workload/terraform/microsoft365/*.tf'
 
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
     if: github.event_name != 'workflow_dispatch'
     uses: ./.github/workflows/branch-name-check.yml
     with:
-      branch-name: ${{ github.event.pull_request.head.ref }} # // TODO make this dynamic incase it's manually triggered?
+      branch-name: ${{ github.event.pull_request.head.ref }}
   
 
   terraform-upload-config-and-plan:
@@ -46,7 +46,7 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
 
       - name: Upload configuration to tf cloud
@@ -55,7 +55,7 @@ jobs:
         with:
           token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
-          directory: "workload/terraform/jamfpro"
+          directory: "workload/terraform/microsoft365"
           speculative: true
 
 
@@ -103,7 +103,7 @@ jobs:
           EOF
 
       - name: Upload plan output json artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.6.2
         with:
           name: ${{ vars.PLAN_OUTPUT_ARTIFACT_NAME }}
           path: ${{ vars.ARTIFACT_FN }}

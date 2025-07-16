@@ -282,6 +282,11 @@ export M365_CLIENT_SECRET=""
 export M365_CLIENT_CERTIFICATE_FILE_PATH="/some/path/to/your/cert.key"
 export M365_CLIENT_CERTIFICATE_PASSWORD="cert_password"
 
+# Set Azure AD environment variables for Service Principal authentication
+export ARM_TENANT_ID="$M365_TENANT_ID"
+export ARM_CLIENT_ID="$M365_CLIENT_ID"
+export ARM_CLIENT_SECRET="$M365_CLIENT_SECRET"
+
 # Set common variables
 export M365_CLOUD="public"
 export TF_LOG="DEBUG"
