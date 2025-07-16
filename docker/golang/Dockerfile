@@ -1,10 +1,12 @@
-FROM golang:1.23.5-alpine3.21 AS builder
+FROM golang:1.24.5-alpine3.22 AS builder
 
 # Build PR updater
 WORKDIR /build/pr_updater
-COPY ./scripts/update_pr/go.mod ./scripts/update_pr/go.sum ./
-COPY ./scripts/update_pr/pr_updater.go .
-COPY ./scripts/update_pr/README.md ./
+# Copy go.mod and go.sum files
+COPY scripts/update_pr/go.mod scripts/update_pr/go.sum ./
+# Copy source files
+COPY scripts/update_pr/pr_updater.go .
+COPY scripts/update_pr/README.md ./
 RUN go mod download
 RUN go build -o pr-updater .
 
@@ -13,5 +15,5 @@ FROM alpine:3.21
 WORKDIR /app
 COPY --from=builder /build/pr_updater/pr-updater .
 
-# Default command can be overridden at runtime
-CMD ["./validator"]
+# Default command to run the PR updater
+CMD ["./pr-updater"]
