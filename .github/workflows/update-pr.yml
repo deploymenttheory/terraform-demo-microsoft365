@@ -1,4 +1,4 @@
-name: '💬 Add PR Comment'
+name: '💬 Add TF Plan Output to PR'
 
 on:
   workflow_call:
@@ -42,5 +42,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{ vars.ARTIFACT_FN }}
+          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{ vars.TF_PLAN_OUTPUT }}
           TARGET_PR_NUMBER: ${{ inputs.target-pr-number }}
