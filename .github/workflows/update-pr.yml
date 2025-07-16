@@ -9,7 +9,7 @@ on:
 
       target-pr-number:
         required: true
-        type: number
+        type: string
         
 jobs:
 
