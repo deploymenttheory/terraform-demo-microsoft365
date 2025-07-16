@@ -1,5 +1,5 @@
 resource "azuread_user" "group_owner" {
-  user_principal_name = "tf-demo-example-group-owner@deploymenttheory.com"
+  user_principal_name = "tf-demo-example-group-owner@${lookup(var.email_domains, var.environment)}"
   display_name        = "tf-demo-example-group-owner"
   mail_nickname       = "tf-demo-example-group-owner"
   password            = "SecretP@sswd99!"
