@@ -14,7 +14,7 @@ on:
 
     # if .tf files in this directory are part of the diff.
     paths:
-      - 'workload/terraform/jamfpro/*.tf'
+      - 'workload/terraform/microsoft365/*.tf'
 
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
 
       - name: Upload configuration to tf cloud
@@ -39,7 +39,7 @@ jobs:
         with:
           token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
-          directory: "workload/terraform/jamfpro"
+          directory: "workload/terraform/microsoft365"
 
 
       - name: Terraform plan
@@ -70,18 +70,16 @@ jobs:
 
 
       - name: Upload outputs json file as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
-          name: ${{ vars.APPLY_OUTPUT_ARTIFACT_NAME }}
+          name: ${{ vars.TF_PLAN_OUTPUT_ARTIFACT_NAME }}
           path: ${{ vars.TF_PLAN_OUTPUT }}
-
           retention-days: 0
 
-
   update-pr:
-    name: Deposit plan output on trigger pr
+    name: Add tf run output to PR
     needs: terraform-upload-plan-apply
     uses: ./.github/workflows/update-pr.yml
     with:
-      artifact-name: ${{ vars.APPLY_OUTPUT_ARTIFACT_NAME }}
+      artifact-name: ${{ vars.TF_PLAN_OUTPUT_ARTIFACT_NAME }}
       target-pr-number: ${{ github.event.pull_request.number }}
