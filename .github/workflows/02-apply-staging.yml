@@ -2,8 +2,8 @@ name: "🚀 | Workflow 2 - TF Apply Targeted at Staging from Main"
 run-name: "📦 Merge Triggered TF Apply of Main to Staging"
 
 on:
+  # Trigger on PR close
   pull_request:
-
     # When a PR is closed
     types:
       [closed]
@@ -15,13 +15,20 @@ on:
     # if .tf files in this directory are part of the diff.
     paths:
       - 'workload/terraform/microsoft365/*.tf'
+      
+  # Also trigger on push to main (catches squash merges)
+  push:
+    branches:
+      - main
+    paths:
+      - 'workload/terraform/microsoft365/*.tf'
 
 
 jobs:
 
   terraform-upload-plan-apply:
-    # If the closure type was merged (not rejected)
-    if: github.event.pull_request.merged == true
+    # If PR event, only run if merged. Always run for push events.
+    if: github.event_name == 'push' || github.event.pull_request.merged == true
     environment: 'staging'
     runs-on: ubuntu-latest
     env:
@@ -79,6 +86,8 @@ jobs:
   update-pr:
     name: Add tf run output to PR
     needs: terraform-upload-plan-apply
+    # Only run this job for PR events, not for direct pushes
+    if: github.event_name == 'pull_request'
     uses: ./.github/workflows/update-pr.yml
     with:
       artifact-name: ${{ vars.TF_PLAN_OUTPUT_ARTIFACT_NAME }}
