@@ -77,7 +77,7 @@ func main() {
 			Tags:               []string{"microsoft365", "sandbox", "dev", "microsoft_365"},
 			TerraformVersion:   config.TerraformVersion,
 			ExecutionMode:      "local", // CLI-driven workflow
-			WorkingDirectory:   "workload/terraform/microsoft365",
+			WorkingDirectory:   "",      // not used for local execution mode
 			AutoApply:          config.AutoApply,
 			SpeculativeEnabled: config.SpeculativeEnabled,
 		},
@@ -86,8 +86,8 @@ func main() {
 			Tags:               []string{"microsoft365", "staging", "test", "microsoft_365"},
 			TerraformVersion:   config.TerraformVersion,
 			ExecutionMode:      "remote", // API-driven workflow
-			WorkingDirectory:   "workload/terraform/microsoft365",
-			AutoApply:          false, // More restrictive for staging
+			WorkingDirectory:   "",       // will set in gha pipeline
+			AutoApply:          false,    // More restrictive for staging
 			SpeculativeEnabled: config.SpeculativeEnabled,
 		},
 		{
@@ -95,8 +95,8 @@ func main() {
 			Tags:               []string{"microsoft365", "production", "prod", "microsoft_365"},
 			TerraformVersion:   config.TerraformVersion,
 			ExecutionMode:      "remote", // API-driven workflow
-			WorkingDirectory:   "workload/terraform/microsoft365",
-			AutoApply:          false, // Never auto-apply in production
+			WorkingDirectory:   "",       // will set in gh pipeline
+			AutoApply:          false,    // Never auto-apply in production
 			SpeculativeEnabled: config.SpeculativeEnabled,
 		},
 	}
