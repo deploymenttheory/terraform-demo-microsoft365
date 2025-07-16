@@ -55,7 +55,7 @@ jobs:
         with:
           token: ${{ secrets.TF_API_TOKEN }}
           workspace: ${{ vars.TF_WORKSPACE }}
-          directory: "workload/terraform/microsoft365"
+          directory: "./workload/terraform/microsoft365"
           speculative: true
 
 
