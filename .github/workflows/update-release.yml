@@ -33,5 +33,6 @@ jobs:
 
       - name: Update PR
         env:
-          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{ vars.ARTIFACT_FN }}
+          ARTIFACT_PATH: ${{ steps.download-artifact.outputs.download-path }}/${{ vars.TF_PLAN_OUTPUT }}
+
         run: ./pr-updater

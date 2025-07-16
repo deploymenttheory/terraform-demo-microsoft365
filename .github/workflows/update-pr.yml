@@ -36,9 +36,16 @@ jobs:
         with:
           name: ${{ inputs.artifact-name }}
 
+      - name: Debug file path
+        run: |
+          echo "Download path: ${{ steps.download-artifact.outputs.download-path }}"
+          ls -la ${{ steps.download-artifact.outputs.download-path }}
+          echo "TF_PLAN_OUTPUT: ${{ vars.TF_PLAN_OUTPUT }}"
+
       - name: Run PR updater utility
         run: |
-          ./pr-updater
+          # Use the PR updater from the container's /app directory
+          /app/pr-updater
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
