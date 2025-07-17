@@ -11,7 +11,7 @@ terraform {
       source  = "hashicorp/azuread"
       version = "~> 3.4.0"
     }
-    
+
   }
 
   cloud {
