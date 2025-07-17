@@ -8,15 +8,15 @@ resource "microsoft365_graph_beta_device_and_app_management_macos_pkg_app" "mozi
   owner                   = "Example Owner"
   developer               = "Example Developer"
   notes                   = "This is a macOS PKG application managed through Terraform."
-  role_scope_tag_ids      = [ "0"]
+  role_scope_tag_ids      = ["0"]
 
   categories = [
-    "Business",                                                                        
+    "Business",
     "Productivity",
   ]
 
   app_installer = {
-    installer_url_source       = "https://ftp.mozilla.org/pub/firefox/releases/140.0/mac/en-GB/Firefox%20140.0.pkg"
+    installer_url_source = "https://ftp.mozilla.org/pub/firefox/releases/140.0/mac/en-GB/Firefox%20140.0.pkg"
   }
 
   macos_pkg_app = {
