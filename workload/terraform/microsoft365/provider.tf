@@ -3,7 +3,7 @@ provider "azuread" {
   //alias = "azuread_provider"
   # Explicitly disable CLI usage and use Service Principal authentication
   use_cli = false
-  
+
   # Explicitly set credentials
   tenant_id     = var.tenant_id
   client_id     = var.client_id
