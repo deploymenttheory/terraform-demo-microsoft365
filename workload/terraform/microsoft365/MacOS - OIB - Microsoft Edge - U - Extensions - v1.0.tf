@@ -13,14 +13,14 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
     settings = [
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_extensioninstallallowlist"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_extensioninstallallowlist"
           setting_instance_template_reference = null
           simple_setting_collection_value = [
             {
-              odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+              odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
               setting_value_template_reference = null
-              value = "odfafepnkmbhccpbejgmiehpchacaeak"
+              value                            = "odfafepnkmbhccpbejgmiehpchacaeak"
             }
           ]
         }
@@ -28,32 +28,32 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_blockexternalextensions"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_blockexternalextensions"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_blockexternalextensions_true"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_blockexternalextensions_true"
           }
         }
         id = "1"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_extensioninstallforcelist"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_extensioninstallforcelist"
           setting_instance_template_reference = null
           simple_setting_collection_value = [
             {
-              odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+              odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
               setting_value_template_reference = null
-              value = "nkbndigcebkoaejohleckhekfmcecfja"
+              value                            = "nkbndigcebkoaejohleckhekfmcecfja"
             },
             {
-              odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+              odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
               setting_value_template_reference = null
-              value = "ofefcgjbeghpigppfmkologfjadafddi"
+              value                            = "ofefcgjbeghpigppfmkologfjadafddi"
             }
           ]
         }
@@ -61,14 +61,14 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_extensioninstallblocklist"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_extensioninstallblocklist"
           setting_instance_template_reference = null
           simple_setting_collection_value = [
             {
-              odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+              odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
               setting_value_template_reference = null
-              value = "*"
+              value                            = "*"
             }
           ]
         }

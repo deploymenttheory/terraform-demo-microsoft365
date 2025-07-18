@@ -13,51 +13,51 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
     settings = [
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-          setting_definition_id = "enforcement_enforcement"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+          setting_definition_id               = "enforcement_enforcement"
           setting_instance_template_reference = null
           group_setting_collection_value = [
             {
               setting_value_template_reference = null
               children = [
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                  setting_definition_id = "enforcement_detailsurl"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                  setting_definition_id               = "enforcement_detailsurl"
                   setting_instance_template_reference = null
                   simple_setting_value = {
-                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                     setting_value_template_reference = null
-                    value = "https://path.com"
+                    value                            = "https://path.com"
                   }
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                  setting_definition_id = "enforcement_targetbuildversion"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                  setting_definition_id               = "enforcement_targetbuildversion"
                   setting_instance_template_reference = null
                   simple_setting_value = {
-                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                     setting_value_template_reference = null
-                    value = "20A242a"
+                    value                            = "20A242a"
                   }
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                  setting_definition_id = "enforcement_targetlocaldatetime"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                  setting_definition_id               = "enforcement_targetlocaldatetime"
                   setting_instance_template_reference = null
                   simple_setting_value = {
-                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                     setting_value_template_reference = null
-                    value = "07/18/2025 23:55:00"
+                    value                            = "07/18/2025 23:55:00"
                   }
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                  setting_definition_id = "enforcement_targetosversion"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                  setting_definition_id               = "enforcement_targetosversion"
                   setting_instance_template_reference = null
                   simple_setting_value = {
-                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                     setting_value_template_reference = null
-                    value = "15.5"
+                    value                            = "15.5"
                   }
                 }
               ]
@@ -68,38 +68,38 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-          setting_definition_id = "ddm-latestsoftwareupdate_ddm-latestsoftwareupdate"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+          setting_definition_id               = "ddm-latestsoftwareupdate_ddm-latestsoftwareupdate"
           setting_instance_template_reference = null
           group_setting_collection_value = [
             {
               setting_value_template_reference = null
               children = [
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                  setting_definition_id = "ddm-latestsoftwareupdate_enforcelatestsoftwareupdateversion"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                  setting_definition_id               = "ddm-latestsoftwareupdate_enforcelatestsoftwareupdateversion"
                   setting_instance_template_reference = null
                   choice_setting_value = {
                     setting_value_template_reference = null
                     children = [
                       {
-                        odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                        setting_definition_id = "ddm-latestsoftwareupdate_delayindays"
+                        odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                        setting_definition_id               = "ddm-latestsoftwareupdate_delayindays"
                         setting_instance_template_reference = null
                         simple_setting_value = {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
+                          odata_type                       = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
                           setting_value_template_reference = null
-                          value = 1
+                          value                            = 1
                         }
                       },
                       {
-                        odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                        setting_definition_id = "ddm-latestsoftwareupdate_installtime"
+                        odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                        setting_definition_id               = "ddm-latestsoftwareupdate_installtime"
                         setting_instance_template_reference = null
                         simple_setting_value = {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                          odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                           setting_value_template_reference = null
-                          value = "00:00"
+                          value                            = "00:00"
                         }
                       }
                     ]
@@ -114,59 +114,59 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-          setting_definition_id = "softwareupdate_softwareupdate"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+          setting_definition_id               = "softwareupdate_softwareupdate"
           setting_instance_template_reference = null
           group_setting_collection_value = [
             {
               setting_value_template_reference = null
               children = [
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                  setting_definition_id = "softwareupdate_allowstandarduserosupdates"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                  setting_definition_id               = "softwareupdate_allowstandarduserosupdates"
                   setting_instance_template_reference = null
                   choice_setting_value = {
                     setting_value_template_reference = null
-                    children = []
-                    value = "softwareupdate_allowstandarduserosupdates_true"
+                    children                         = []
+                    value                            = "softwareupdate_allowstandarduserosupdates_true"
                   }
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                  setting_definition_id = "softwareupdate_automaticactions"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                  setting_definition_id               = "softwareupdate_automaticactions"
                   setting_instance_template_reference = null
                   group_setting_collection_value = [
                     {
                       setting_value_template_reference = null
                       children = [
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "softwareupdate_automaticactions_download"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "softwareupdate_automaticactions_download"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "softwareupdate_automaticactions_download_0"
+                            children                         = []
+                            value                            = "softwareupdate_automaticactions_download_0"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "softwareupdate_automaticactions_installosupdates"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "softwareupdate_automaticactions_installosupdates"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "softwareupdate_automaticactions_installosupdates_0"
+                            children                         = []
+                            value                            = "softwareupdate_automaticactions_installosupdates_0"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "softwareupdate_automaticactions_installsecurityupdate"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "softwareupdate_automaticactions_installsecurityupdate"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "softwareupdate_automaticactions_installsecurityupdate_1"
+                            children                         = []
+                            value                            = "softwareupdate_automaticactions_installsecurityupdate_1"
                           }
                         }
                       ]
@@ -174,39 +174,39 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
                   ]
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                  setting_definition_id = "softwareupdate_beta"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                  setting_definition_id               = "softwareupdate_beta"
                   setting_instance_template_reference = null
                   group_setting_collection_value = [
                     {
                       setting_value_template_reference = null
                       children = [
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                          setting_definition_id = "softwareupdate_beta_offerprograms"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                          setting_definition_id               = "softwareupdate_beta_offerprograms"
                           setting_instance_template_reference = null
                           group_setting_collection_value = [
                             {
                               setting_value_template_reference = null
                               children = [
                                 {
-                                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                                  setting_definition_id = "softwareupdate_beta_offerprograms_item_description"
+                                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                                  setting_definition_id               = "softwareupdate_beta_offerprograms_item_description"
                                   setting_instance_template_reference = null
                                   simple_setting_value = {
-                                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                                     setting_value_template_reference = null
-                                    value = "thing"
+                                    value                            = "thing"
                                   }
                                 },
                                 {
-                                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                                  setting_definition_id = "softwareupdate_beta_offerprograms_item_token"
+                                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                                  setting_definition_id               = "softwareupdate_beta_offerprograms_item_token"
                                   setting_instance_template_reference = null
                                   simple_setting_value = {
-                                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                                     setting_value_template_reference = null
-                                    value = "1234567890-0987654321"
+                                    value                            = "1234567890-0987654321"
                                   }
                                 }
                               ]
@@ -214,41 +214,41 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
                           ]
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "softwareupdate_beta_programenrollment"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "softwareupdate_beta_programenrollment"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "softwareupdate_beta_programenrollment_0"
+                            children                         = []
+                            value                            = "softwareupdate_beta_programenrollment_0"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                          setting_definition_id = "softwareupdate_beta_requireprogram"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                          setting_definition_id               = "softwareupdate_beta_requireprogram"
                           setting_instance_template_reference = null
                           group_setting_collection_value = [
                             {
                               setting_value_template_reference = null
                               children = [
                                 {
-                                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                                  setting_definition_id = "softwareupdate_beta_requireprogram_description"
+                                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                                  setting_definition_id               = "softwareupdate_beta_requireprogram_description"
                                   setting_instance_template_reference = null
                                   simple_setting_value = {
-                                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                                     setting_value_template_reference = null
-                                    value = "thing"
+                                    value                            = "thing"
                                   }
                                 },
                                 {
-                                  odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                                  setting_definition_id = "softwareupdate_beta_requireprogram_token"
+                                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                                  setting_definition_id               = "softwareupdate_beta_requireprogram_token"
                                   setting_instance_template_reference = null
                                   simple_setting_value = {
-                                    odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                                    odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                                     setting_value_template_reference = null
-                                    value = "1234567890-0987654321"
+                                    value                            = "1234567890-0987654321"
                                   }
                                 }
                               ]
@@ -260,41 +260,41 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
                   ]
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                  setting_definition_id = "softwareupdate_deferrals"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                  setting_definition_id               = "softwareupdate_deferrals"
                   setting_instance_template_reference = null
                   group_setting_collection_value = [
                     {
                       setting_value_template_reference = null
                       children = [
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "softwareupdate_deferrals_majorperiodindays"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "softwareupdate_deferrals_majorperiodindays"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
                             setting_value_template_reference = null
-                            value = 1
+                            value                            = 1
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "softwareupdate_deferrals_minorperiodindays"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "softwareupdate_deferrals_minorperiodindays"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
                             setting_value_template_reference = null
-                            value = 5
+                            value                            = 5
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "softwareupdate_deferrals_systemperiodindays"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "softwareupdate_deferrals_systemperiodindays"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
                             setting_value_template_reference = null
-                            value = 30
+                            value                            = 30
                           }
                         }
                       ]
@@ -302,41 +302,41 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
                   ]
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                  setting_definition_id = "softwareupdate_notifications"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                  setting_definition_id               = "softwareupdate_notifications"
                   setting_instance_template_reference = null
                   choice_setting_value = {
                     setting_value_template_reference = null
-                    children = []
-                    value = "softwareupdate_notifications_true"
+                    children                         = []
+                    value                            = "softwareupdate_notifications_true"
                   }
                 },
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                  setting_definition_id = "softwareupdate_rapidsecurityresponse"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                  setting_definition_id               = "softwareupdate_rapidsecurityresponse"
                   setting_instance_template_reference = null
                   group_setting_collection_value = [
                     {
                       setting_value_template_reference = null
                       children = [
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "softwareupdate_rapidsecurityresponse_enable"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "softwareupdate_rapidsecurityresponse_enable"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "softwareupdate_rapidsecurityresponse_enable_true"
+                            children                         = []
+                            value                            = "softwareupdate_rapidsecurityresponse_enable_true"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "softwareupdate_rapidsecurityresponse_enablerollback"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "softwareupdate_rapidsecurityresponse_enablerollback"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "softwareupdate_rapidsecurityresponse_enablerollback_true"
+                            children                         = []
+                            value                            = "softwareupdate_rapidsecurityresponse_enablerollback_true"
                           }
                         }
                       ]

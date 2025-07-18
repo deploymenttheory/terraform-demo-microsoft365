@@ -13,49 +13,49 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
     settings = [
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-          setting_definition_id = "com.apple.servicemanagement_com.apple.servicemanagement"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+          setting_definition_id               = "com.apple.servicemanagement_com.apple.servicemanagement"
           setting_instance_template_reference = null
           group_setting_collection_value = [
             {
               setting_value_template_reference = null
               children = [
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                  setting_definition_id = "com.apple.servicemanagement_rules"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                  setting_definition_id               = "com.apple.servicemanagement_rules"
                   setting_instance_template_reference = null
                   group_setting_collection_value = [
                     {
                       setting_value_template_reference = null
                       children = [
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "com.apple.servicemanagement_rules_item_comment"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "com.apple.servicemanagement_rules_item_comment"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                             setting_value_template_reference = null
-                            value = "Edge Updater"
+                            value                            = "Edge Updater"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "com.apple.servicemanagement_rules_item_ruletype"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "com.apple.servicemanagement_rules_item_ruletype"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "com.apple.servicemanagement_rules_item_ruletype_3"
+                            children                         = []
+                            value                            = "com.apple.servicemanagement_rules_item_ruletype_3"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "com.apple.servicemanagement_rules_item_rulevalue"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "com.apple.servicemanagement_rules_item_rulevalue"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                             setting_value_template_reference = null
-                            value = "com.microsoft.EdgeUpdater"
+                            value                            = "com.microsoft.EdgeUpdater"
                           }
                         }
                       ]
@@ -70,26 +70,26 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_componentupdatesenabled"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_componentupdatesenabled"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_componentupdatesenabled_true"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_componentupdatesenabled_true"
           }
         }
         id = "1"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_relaunchnotification"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_relaunchnotification"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_relaunchnotification_1"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_relaunchnotification_1"
           }
         }
         id = "2"

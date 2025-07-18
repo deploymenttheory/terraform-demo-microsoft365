@@ -13,49 +13,49 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
     settings = [
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-          setting_definition_id = "com.apple.servicemanagement_com.apple.servicemanagement"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+          setting_definition_id               = "com.apple.servicemanagement_com.apple.servicemanagement"
           setting_instance_template_reference = null
           group_setting_collection_value = [
             {
               setting_value_template_reference = null
               children = [
                 {
-                  odata_type = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
-                  setting_definition_id = "com.apple.servicemanagement_rules"
+                  odata_type                          = "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance"
+                  setting_definition_id               = "com.apple.servicemanagement_rules"
                   setting_instance_template_reference = null
                   group_setting_collection_value = [
                     {
                       setting_value_template_reference = null
                       children = [
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "com.apple.servicemanagement_rules_item_comment"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "com.apple.servicemanagement_rules_item_comment"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                             setting_value_template_reference = null
-                            value = "MAU"
+                            value                            = "MAU"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                          setting_definition_id = "com.apple.servicemanagement_rules_item_ruletype"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                          setting_definition_id               = "com.apple.servicemanagement_rules_item_ruletype"
                           setting_instance_template_reference = null
                           choice_setting_value = {
                             setting_value_template_reference = null
-                            children = []
-                            value = "com.apple.servicemanagement_rules_item_ruletype_0"
+                            children                         = []
+                            value                            = "com.apple.servicemanagement_rules_item_ruletype_0"
                           }
                         },
                         {
-                          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-                          setting_definition_id = "com.apple.servicemanagement_rules_item_rulevalue"
+                          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+                          setting_definition_id               = "com.apple.servicemanagement_rules_item_rulevalue"
                           setting_instance_template_reference = null
                           simple_setting_value = {
-                            odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+                            odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
                             setting_value_template_reference = null
-                            value = "com.microsoft.autoupdate2"
+                            value                            = "com.microsoft.autoupdate2"
                           }
                         }
                       ]
@@ -70,143 +70,143 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_acknowledgeddatacollectionpolicy"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_acknowledgeddatacollectionpolicy"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_acknowledgeddatacollectionpolicy_0"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_acknowledgeddatacollectionpolicy_0"
           }
         }
         id = "1"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_updatedeadline.daysbeforeforcedquit"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_updatedeadline.daysbeforeforcedquit"
           setting_instance_template_reference = null
           simple_setting_value = {
-            odata_type = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
+            odata_type                       = "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue"
             setting_value_template_reference = null
-            value = 14
+            value                            = 14
           }
         }
         id = "2"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_manifestserver"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_manifestserver"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_manifestserver_0"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_manifestserver_0"
           }
         }
         id = "3"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_disableinsidercheckbox"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_disableinsidercheckbox"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_disableinsidercheckbox_true"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_disableinsidercheckbox_true"
           }
         }
         id = "4"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_howtocheck"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_howtocheck"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_howtocheck_0"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_howtocheck_0"
           }
         }
         id = "5"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_enablecheckforupdatesbutton"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_enablecheckforupdatesbutton"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_enablecheckforupdatesbutton_true"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_enablecheckforupdatesbutton_true"
           }
         }
         id = "6"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_guardagainstappmodification"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_guardagainstappmodification"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_guardagainstappmodification_true"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_guardagainstappmodification_true"
           }
         }
         id = "7"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_startdaemononapplaunch"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_startdaemononapplaunch"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_startdaemononapplaunch_true"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_startdaemononapplaunch_true"
           }
         }
         id = "8"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_updatecache"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_updatecache"
           setting_instance_template_reference = null
           simple_setting_value = {
-            odata_type = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
+            odata_type                       = "#microsoft.graph.deviceManagementConfigurationStringSettingValue"
             setting_value_template_reference = null
-            value = "https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/OfficeMac/"
+            value                            = "https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/OfficeMac/"
           }
         }
         id = "9"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_channelname"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_channelname"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_channelname_4"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_channelname_4"
           }
         }
         id = "10"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "com.apple.managedclient.preferences_updateroptimization"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "com.apple.managedclient.preferences_updateroptimization"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "com.apple.managedclient.preferences_updateroptimization_1"
+            children                         = []
+            value                            = "com.apple.managedclient.preferences_updateroptimization_1"
           }
         }
         id = "11"

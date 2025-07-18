@@ -13,111 +13,111 @@ resource "microsoft365_graph_beta_device_management_settings_catalog_configurati
     settings = [
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio_1"
           }
         }
         id = "0"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio_capture"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio_capture"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio_capture_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_audio_capture_1"
           }
         }
         id = "1"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_admx_terminalserver_ts_time_zone"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_admx_terminalserver_ts_time_zone"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_admx_terminalserver_ts_time_zone_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_admx_terminalserver_ts_time_zone_1"
           }
         }
         id = "2"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_com"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_com"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_com_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_com_1"
           }
         }
         id = "3"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_remotedesktopservices_donotallowdriveredirection"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_remotedesktopservices_donotallowdriveredirection"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_remotedesktopservices_donotallowdriveredirection_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_remotedesktopservices_donotallowdriveredirection_1"
           }
         }
         id = "4"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_lpt"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_lpt"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_lpt_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_lpt_1"
           }
         }
         id = "5"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_pnp"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_pnp"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
-            children = []
-            value = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_pnp_1"
+            children                         = []
+            value                            = "device_vendor_msft_policy_config_admx_terminalserver_ts_client_pnp_1"
           }
         }
         id = "6"
       },
       {
         setting_instance = {
-          odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-          setting_definition_id = "device_vendor_msft_policy_config_remotedesktopservices_limitservertoclientclipboardredirection"
+          odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+          setting_definition_id               = "device_vendor_msft_policy_config_remotedesktopservices_limitservertoclientclipboardredirection"
           setting_instance_template_reference = null
           choice_setting_value = {
             setting_value_template_reference = null
             children = [
               {
-                odata_type = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
-                setting_definition_id = "device_vendor_msft_policy_config_remotedesktopservices_limitservertoclientclipboardredirection_ts_sc_clipboard_restriction_text"
+                odata_type                          = "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+                setting_definition_id               = "device_vendor_msft_policy_config_remotedesktopservices_limitservertoclientclipboardredirection_ts_sc_clipboard_restriction_text"
                 setting_instance_template_reference = null
                 choice_setting_value = {
                   setting_value_template_reference = null
-                  children = []
-                  value = "device_vendor_msft_policy_config_remotedesktopservices_limitservertoclientclipboardredirection_ts_sc_clipboard_restriction_text_0"
+                  children                         = []
+                  value                            = "device_vendor_msft_policy_config_remotedesktopservices_limitservertoclientclipboardredirection_ts_sc_clipboard_restriction_text_0"
                 }
               }
             ]

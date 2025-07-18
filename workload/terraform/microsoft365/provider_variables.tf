@@ -1,30 +1,12 @@
+######################################################################
+# Project Variables
+######################################################################
 
-# Existing variables
+######################### Provider Variables #########################
 variable "cloud" {
   description = "The cloud to use for authentication and Graph / Graph Beta API requests. Default is `public`. Valid values are `public`, `gcc`, `gcchigh`, `china`, `dod`, `ex`, `rx`. Can also be set using the `M365_CLOUD` environment variable."
   type        = string
   default     = "public"
-}
-
-# Environment-specific variables
-variable "environment" {
-  description = "The environment to deploy to. Valid values are 'sandbox' and 'staging'."
-  type        = string
-  default     = "sandbox"
-
-  validation {
-    condition     = contains(["sandbox", "staging"], var.environment)
-    error_message = "The environment must be one of: sandbox, staging."
-  }
-}
-
-variable "email_domains" {
-  description = "Map of environment to email domain"
-  type        = map(string)
-  default = {
-    sandbox = "deploymenttheory.com"
-    staging = "ignitemyfire.co.uk"
-  }
 }
 
 variable "tenant_id" {
