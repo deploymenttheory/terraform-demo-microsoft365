@@ -70,14 +70,18 @@ func main() {
 
 	tfClient := &Client{Client: client}
 
+	// Execution mode:
+	// Local: Your plans and applies occur on machines you control. HCP Terraform is only used to store and synchronize state.
+	// Remote: Your plans and applies occur on HCP Terraform's infrastructure. You and your team have the ability to review and collaborate on runs within the app.
+
 	// Define environments
 	environments := []Environment{
 		{
 			Name:               "sandbox",
 			Tags:               []string{"microsoft365", "sandbox", "dev", "microsoft_365"},
 			TerraformVersion:   config.TerraformVersion,
-			ExecutionMode:      "local", // CLI-driven workflow
-			WorkingDirectory:   "",      // not used for local execution mode
+			ExecutionMode:      "remote", // API-driven workflow
+			WorkingDirectory:   "",       // not used for local execution mode
 			AutoApply:          config.AutoApply,
 			SpeculativeEnabled: config.SpeculativeEnabled,
 		},
@@ -87,7 +91,7 @@ func main() {
 			TerraformVersion:   config.TerraformVersion,
 			ExecutionMode:      "remote", // API-driven workflow
 			WorkingDirectory:   "",       // will set in gha pipeline
-			AutoApply:          false,    // More restrictive for staging
+			AutoApply:          true,     // Automatically apply changes when a Terraform plan is successful. If this workspace is linked to version control, a push to the default branch of the linked repository will trigger a plan and apply.
 			SpeculativeEnabled: config.SpeculativeEnabled,
 		},
 		{
