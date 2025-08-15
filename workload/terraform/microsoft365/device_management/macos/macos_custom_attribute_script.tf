@@ -1,0 +1,61 @@
+resource "microsoft365_graph_beta_device_management_macos_custom_attribute_script" "last_reboot_time" {
+  custom_attribute_type = "string"
+  display_name          = "Last Reboot Time"
+  description           = "Last Reboot Time"
+  script_content        = file("${path.module}/macos_scripts/macos_custom_attribute_scripts/last_reboot_time.sh")
+  run_as_account        = "system"
+  file_name             = "last_reboot_time.sh"
+
+  # Assignments are defined as a set
+  assignments = [
+    # Optional: Assignment targeting all devices with include filter
+    {
+      type        = "allDevicesAssignmentTarget"
+      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_type = "include"
+    },
+    # Optional: Assignment targeting all licensed users with exclude filter
+    {
+      type        = "allLicensedUsersAssignmentTarget"
+      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_type = "exclude"
+    },
+    # Optional: Assignment targeting a specific group with include filter
+    {
+      type        = "groupAssignmentTarget"
+      group_id    = "f46f43de-ba95-4fcd-8417-7f0e64b317c2"
+      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_type = "include"
+    },
+    # Optional: Assignment targeting a specific group with exclude filter
+    {
+      type        = "groupAssignmentTarget"
+      group_id    = "4f03648f-2a22-4aa2-8131-fb22eea9db3c"
+      filter_id   = "80f8c0a5-f3ec-4936-bcbc-420dc0ca3665"
+      filter_type = "include"
+    },
+    # Optional: Assignment targeting a specific group with exclude filter
+    {
+      type        = "groupAssignmentTarget"
+      group_id    = "3ccdd168-fff4-4714-8960-4cd7e0d8d264"
+      filter_id   = "80f8c0a5-f3ec-4936-bcbc-420dc0ca3665"
+      filter_type = "exclude"
+    },
+    # Optional: Exclusion group assignments
+    {
+      type     = "exclusionGroupAssignmentTarget"
+      group_id = "e8986088-3eb9-4251-89e9-f7b971601023"
+    },
+    {
+      type     = "exclusionGroupAssignmentTarget"
+      group_id = "3df4b46e-776a-4c46-9aef-7350661f6529"
+    },
+  ]
+
+  timeouts = {
+    create = "30m"
+    update = "30m"
+    read   = "30m"
+    delete = "30m"
+  }
+} 

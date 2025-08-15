@@ -14,4 +14,9 @@
 **/.terraform/
 *.terraform.lock.hcl
 *.tfvars
+*.tfstate
+*.tfstate.backup
 sandbox_env_vars.sh
+
+
+**/.claude/
