@@ -4,7 +4,7 @@ terraform {
   required_providers {
     microsoft365 = {
       source  = "deploymenttheory/microsoft365"
-      version = "0.21.3-alpha"
+      version = "0.26.3-alpha"
     }
 
     azuread = {
@@ -19,7 +19,7 @@ terraform {
 
     workspaces {
       # This is only relevant for CLI calls and is ignored by API calls via pipelines, therefore it can be safely left here.
-      tags = ["microsoft_365"]
+      tags = ["microsoft365"]
     }
   }
 }

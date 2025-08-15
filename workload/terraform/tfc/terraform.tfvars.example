@@ -1,0 +1,45 @@
+# Example terraform.tfvars file
+# Copy this to terraform.tfvars and customize the values
+
+organization_name     = "deploymenttheory"
+project_name         = "microsoft_365"
+project_description  = "Microsoft 365 managed as code"
+terraform_version    = "1.12.2"
+auto_apply_sandbox   = false
+speculative_enabled  = true
+
+# Common variable set values
+m365_cloud            = "public"
+tf_log_level         = "INFO"
+m365_debug_mode      = "false"
+m365_telemetry_optout = "true"
+tfe_parallelism      = "1"
+
+# Terraform version management
+terraform_versions = ["1.12.2", "1.11.7", "1.10.8"]
+
+# Provider registry management
+enable_additional_providers = true
+
+# Optional features (uncomment to enable)
+# enable_policies = true
+# enable_notifications = true
+# enable_team_access = true
+
+# VCS integration for staging workspaces (uncomment and configure to enable)
+# vcs_repo_staging = {
+#   identifier     = "deploymenttheory/terraform-demo-microsoft365"
+#   branch         = "staging"
+#   oauth_token_id = "ot-xxxxxxxxxxxxxx"
+# }
+
+# VCS integration for production workspaces (uncomment and configure to enable)
+# vcs_repo_production = {
+#   identifier     = "deploymenttheory/terraform-demo-microsoft365"
+#   branch         = "main"
+#   oauth_token_id = "ot-xxxxxxxxxxxxxx"
+# }
+
+# Notifications (uncomment to enable)
+# slack_webhook_url = "https://hooks.slack.com/services/..."
+# notification_email_addresses = ["admin@example.com"]
