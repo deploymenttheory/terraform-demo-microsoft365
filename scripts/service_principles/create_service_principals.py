@@ -90,22 +90,28 @@ class ServicePrincipalManager:
     def _create_application(self, sp_config: dict) -> Application:
         """Create application in Azure AD"""
         try:
+            # Get environment suffix
+            environment = os.getenv('ENVIRONMENT', 'dev')
+            
             # Create required resource access for Microsoft Graph
             resource_access = self._create_resource_access(sp_config['permissions'])
             required_resource_access = RequiredResourceAccess()
             required_resource_access.resource_app_id = self.config['graph']['resource_app_id']
             required_resource_access.resource_access = resource_access
 
-            # Create application object
+            # Create application object with environment suffix
+            display_name = f"{sp_config['display_name']}-{environment}"
+            description = f"{sp_config['description']} ({environment} environment)"
+            
             application = Application()
-            application.display_name = sp_config['display_name']
-            application.description = sp_config['description']
-            application.tags = sp_config['tags']
+            application.display_name = display_name
+            application.description = description
+            application.tags = sp_config['tags'] + [environment]
             application.required_resource_access = [required_resource_access]
 
             # Create application via Graph API
             created_app = self.client.applications.post(application)
-            logger.info("Created application: %s (ID: %s)", sp_config['display_name'], created_app.id)
+            logger.info("Created application: %s (ID: %s)", display_name, created_app.id)
             return created_app
 
         except (ValueError, KeyError) as e:

@@ -12,17 +12,13 @@ on:
         - development
         - staging
         - production
-  push:
-    branches: [ main ]
-    paths:
-      - 'scripts/service_principles/**'
 
 env:
   PYTHON_VERSION: '3.11'
 
 jobs:
   setup-service-principals:
-    name: Create Service Principals
+    name: Create Service Principals - ${{ inputs.environment }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -30,6 +26,11 @@ jobs:
     
     outputs:
       service_principals: ${{ steps.create-sps.outputs.service_principals }}
+    
+    strategy:
+      matrix:
+        environment: [development, staging, production]
+      fail-fast: false
     
     steps:
       - name: Checkout code
@@ -47,19 +48,20 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Create service principals
+      - name: Create service principals for ${{ matrix.environment }}
         id: create-sps
         working-directory: scripts/service_principles
         run: |
           python create_service_principals.py
         env:
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ENVIRONMENT: ${{ matrix.environment }}
+          AZURE_CLIENT_ID: ${{ matrix.environment == 'development' && secrets.DEVELOPMENT_SETUP_CLIENT_ID || matrix.environment == 'staging' && secrets.STAGING_SETUP_CLIENT_ID || secrets.PRODUCTION_SETUP_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ matrix.environment == 'development' && secrets.DEVELOPMENT_SETUP_TENANT_ID || matrix.environment == 'staging' && secrets.STAGING_SETUP_TENANT_ID || secrets.PRODUCTION_SETUP_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ matrix.environment == 'development' && secrets.DEVELOPMENT_SETUP_CLIENT_SECRET || matrix.environment == 'staging' && secrets.STAGING_SETUP_CLIENT_SECRET || secrets.PRODUCTION_SETUP_CLIENT_SECRET }}
 
-      - name: Display created service principals
+      - name: Display created service principals for ${{ matrix.environment }}
         run: |
-          echo "Service Principals created:"
+          echo "Service Principals created for ${{ matrix.environment }}:"
           echo '${{ steps.create-sps.outputs.service_principals }}' | jq .
 
   use-service-principals:
