@@ -16,7 +16,7 @@ resource "azuread_group" "intune_deployment_ring_1_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -36,7 +36,7 @@ resource "azuread_group" "intune_deployment_ring_2_early_adopters" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -56,7 +56,7 @@ resource "azuread_group" "intune_deployment_ring_3_broad" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -76,7 +76,7 @@ resource "azuread_group" "intune_deployment_ring_4_critical" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -96,7 +96,7 @@ resource "azuread_group" "intune_deployment_windows_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -115,7 +115,7 @@ resource "azuread_group" "intune_deployment_windows_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -135,7 +135,7 @@ resource "azuread_group" "intune_deployment_macos_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -154,7 +154,7 @@ resource "azuread_group" "intune_deployment_macos_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -174,7 +174,7 @@ resource "azuread_group" "intune_deployment_ios_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -193,7 +193,7 @@ resource "azuread_group" "intune_deployment_ios_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -213,7 +213,7 @@ resource "azuread_group" "intune_deployment_android_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -232,7 +232,7 @@ resource "azuread_group" "intune_deployment_android_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -252,7 +252,7 @@ resource "azuread_group" "intune_app_deployment_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -271,7 +271,7 @@ resource "azuread_group" "intune_app_deployment_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -291,7 +291,7 @@ resource "azuread_group" "intune_security_policy_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -310,7 +310,7 @@ resource "azuread_group" "intune_security_policy_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -330,7 +330,7 @@ resource "azuread_group" "intune_compliance_policy_pilot" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -349,7 +349,7 @@ resource "azuread_group" "intune_compliance_policy_production" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -369,7 +369,7 @@ resource "azuread_group" "intune_deployment_exclusion_maintenance" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -388,7 +388,7 @@ resource "azuread_group" "intune_deployment_exclusion_emergency" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -408,7 +408,7 @@ resource "azuread_group" "intune_deployment_it_department" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -427,7 +427,7 @@ resource "azuread_group" "intune_deployment_finance_department" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -446,7 +446,7 @@ resource "azuread_group" "intune_deployment_hr_department" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -466,7 +466,7 @@ resource "azuread_group" "intune_deployment_vip_executives" {
   members = []
 
   assignable_to_role = false
-  
+
   lifecycle {
     ignore_changes = [members]
   }
@@ -476,37 +476,37 @@ resource "azuread_group" "intune_deployment_vip_executives" {
 locals {
   deployment_ring_groups = {
     # Main deployment rings
-    ring_1_pilot         = azuread_group.intune_deployment_ring_1_pilot.object_id
+    ring_1_pilot          = azuread_group.intune_deployment_ring_1_pilot.object_id
     ring_2_early_adopters = azuread_group.intune_deployment_ring_2_early_adopters.object_id
-    ring_3_broad         = azuread_group.intune_deployment_ring_3_broad.object_id
-    ring_4_critical      = azuread_group.intune_deployment_ring_4_critical.object_id
-    
+    ring_3_broad          = azuread_group.intune_deployment_ring_3_broad.object_id
+    ring_4_critical       = azuread_group.intune_deployment_ring_4_critical.object_id
+
     # Platform-specific rings
-    windows_pilot        = azuread_group.intune_deployment_windows_pilot.object_id
-    windows_production   = azuread_group.intune_deployment_windows_production.object_id
-    macos_pilot         = azuread_group.intune_deployment_macos_pilot.object_id
-    macos_production    = azuread_group.intune_deployment_macos_production.object_id
-    ios_pilot           = azuread_group.intune_deployment_ios_pilot.object_id
-    ios_production      = azuread_group.intune_deployment_ios_production.object_id
-    android_pilot       = azuread_group.intune_deployment_android_pilot.object_id
-    android_production  = azuread_group.intune_deployment_android_production.object_id
-    
+    windows_pilot      = azuread_group.intune_deployment_windows_pilot.object_id
+    windows_production = azuread_group.intune_deployment_windows_production.object_id
+    macos_pilot        = azuread_group.intune_deployment_macos_pilot.object_id
+    macos_production   = azuread_group.intune_deployment_macos_production.object_id
+    ios_pilot          = azuread_group.intune_deployment_ios_pilot.object_id
+    ios_production     = azuread_group.intune_deployment_ios_production.object_id
+    android_pilot      = azuread_group.intune_deployment_android_pilot.object_id
+    android_production = azuread_group.intune_deployment_android_production.object_id
+
     # Policy-specific rings
-    app_pilot           = azuread_group.intune_app_deployment_pilot.object_id
-    app_production      = azuread_group.intune_app_deployment_production.object_id
-    security_pilot      = azuread_group.intune_security_policy_pilot.object_id
-    security_production = azuread_group.intune_security_policy_production.object_id
-    compliance_pilot    = azuread_group.intune_compliance_policy_pilot.object_id
+    app_pilot             = azuread_group.intune_app_deployment_pilot.object_id
+    app_production        = azuread_group.intune_app_deployment_production.object_id
+    security_pilot        = azuread_group.intune_security_policy_pilot.object_id
+    security_production   = azuread_group.intune_security_policy_production.object_id
+    compliance_pilot      = azuread_group.intune_compliance_policy_pilot.object_id
     compliance_production = azuread_group.intune_compliance_policy_production.object_id
-    
+
     # Exclusion groups
     exclusion_maintenance = azuread_group.intune_deployment_exclusion_maintenance.object_id
-    exclusion_emergency  = azuread_group.intune_deployment_exclusion_emergency.object_id
-    
+    exclusion_emergency   = azuread_group.intune_deployment_exclusion_emergency.object_id
+
     # Department-based rings
-    it_department       = azuread_group.intune_deployment_it_department.object_id
-    finance_department  = azuread_group.intune_deployment_finance_department.object_id
-    hr_department       = azuread_group.intune_deployment_hr_department.object_id
-    vip_executives      = azuread_group.intune_deployment_vip_executives.object_id
+    it_department      = azuread_group.intune_deployment_it_department.object_id
+    finance_department = azuread_group.intune_deployment_finance_department.object_id
+    hr_department      = azuread_group.intune_deployment_hr_department.object_id
+    vip_executives     = azuread_group.intune_deployment_vip_executives.object_id
   }
 }

@@ -6,13 +6,13 @@ resource "tfe_workspace_settings" "sandbox" {
 
   workspace_id   = tfe_workspace.sandbox[each.key].id
   execution_mode = "remote" # Remote execution
-  
+
   # Configure remote state access - disable global access for security
   global_remote_state = false
-  
+
   # Ring-fenced remote state access - only allow specific workspaces that need this workspace's state
   remote_state_consumer_ids = each.value.global_state ? toset([
-    for k, v in local.sandbox_workspaces : tfe_workspace.sandbox[k].id 
+    for k, v in local.sandbox_workspaces : tfe_workspace.sandbox[k].id
     if contains(local.workspace_dependencies[k], each.key)
   ]) : []
 }
@@ -23,13 +23,13 @@ resource "tfe_workspace_settings" "staging" {
 
   workspace_id   = tfe_workspace.staging[each.key].id
   execution_mode = "remote" # Remote execution
-  
+
   # Configure remote state access - disable global access for security
   global_remote_state = false
-  
+
   # Ring-fenced remote state access - only allow specific workspaces that need this workspace's state
   remote_state_consumer_ids = each.value.global_state ? toset([
-    for k, v in local.staging_workspaces : tfe_workspace.staging[k].id 
+    for k, v in local.staging_workspaces : tfe_workspace.staging[k].id
     if contains(local.workspace_dependencies[k], each.key)
   ]) : []
 
@@ -41,14 +41,14 @@ resource "tfe_workspace_settings" "production" {
 
   workspace_id   = tfe_workspace.production[each.key].id
   execution_mode = "remote" # Remote execution
-  
+
   # Configure remote state access - disable global access for security
   global_remote_state = false
-  
+
   # Ring-fenced remote state access - only allow specific workspaces that need this workspace's state
   remote_state_consumer_ids = each.value.global_state ? toset([
-    for k, v in local.production_workspaces : tfe_workspace.production[k].id 
+    for k, v in local.production_workspaces : tfe_workspace.production[k].id
     if contains(local.workspace_dependencies[k], each.key)
   ]) : []
-  
+
 }

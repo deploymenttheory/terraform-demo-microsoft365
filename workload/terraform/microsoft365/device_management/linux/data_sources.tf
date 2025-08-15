@@ -4,7 +4,7 @@
 # Data source for shared device management resources (assignment filters and branding)
 data "terraform_remote_state" "shared" {
   backend = "remote"
-  
+
   config = {
     organization = "deploymenttheory"
     workspaces = {
@@ -16,7 +16,7 @@ data "terraform_remote_state" "shared" {
 # Data source for groups workspace (Azure AD groups and deployment rings)
 data "terraform_remote_state" "groups" {
   backend = "remote"
-  
+
   config = {
     organization = "deploymenttheory"
     workspaces = {
@@ -29,20 +29,20 @@ data "terraform_remote_state" "groups" {
 locals {
   # Assignment filters from shared workspace
   assignment_filters = data.terraform_remote_state.shared.outputs.assignment_filters
-  
+
   # Commonly used assignment filter IDs
   macos_less_than_15_0_filter_id = data.terraform_remote_state.shared.outputs.assignment_filters.macos_less_than_15_0
-  macos_apple_silicon_filter_id = data.terraform_remote_state.shared.outputs.assignment_filters.macos_apple_silicon
-  windows_arm64_filter_id = data.terraform_remote_state.shared.outputs.assignment_filters.windows_arm64_devices
-  
+  macos_apple_silicon_filter_id  = data.terraform_remote_state.shared.outputs.assignment_filters.macos_apple_silicon
+  windows_arm64_filter_id        = data.terraform_remote_state.shared.outputs.assignment_filters.windows_arm64_devices
+
   # Common hardcoded filter IDs that need to be mapped to actual filters
   # These are placeholders - replace with actual filter names from shared workspace
   common_filter_1 = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883" # TODO: Replace with actual remote state reference
   common_filter_2 = "80f8c0a5-f3ec-4936-bcbc-420dc0ca3665" # TODO: Replace with actual remote state reference
-  
+
   # Groups from groups workspace
   # Example: macos_groups = data.terraform_remote_state.groups.outputs.macos_groups
-  
+
   # Intune branding profile from shared workspace
   intune_branding_profile_id = data.terraform_remote_state.shared.outputs.intune_branding_profile_id
 }

@@ -13,7 +13,7 @@ resource "microsoft365_graph_beta_device_management_macos_platform_script" "disa
   execution_frequency           = "PT1H" # ISO 8601 duration format (e.g., P1D for 1 day, PT1H for 1 hour)
   retry_count                   = 3
 
- # Assignments are defined as a set
+  # Assignments are defined as a set
   assignments = [
     # Optional: Assignment targeting all devices with include filter
     {

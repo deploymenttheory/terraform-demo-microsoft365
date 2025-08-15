@@ -10,14 +10,14 @@ locals {
       name   = local.sandbox_workspaces[domain_key].name
     }
   }
-  
+
   staging_domain_map = {
     for domain_key in keys(local.domains) : domain_key => {
       domain = domain_key
       name   = local.staging_workspaces[domain_key].name
     }
   }
-  
+
   production_domain_map = {
     for domain_key in keys(local.domains) : domain_key => {
       domain = domain_key
