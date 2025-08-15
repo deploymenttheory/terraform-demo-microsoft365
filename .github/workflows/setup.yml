@@ -1,0 +1,92 @@
+name: Setup Service Principals
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - development
+        - staging
+        - production
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/service_principles/**'
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  setup-service-principals:
+    name: Create Service Principals
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    
+    outputs:
+      service_principals: ${{ steps.create-sps.outputs.service_principals }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: scripts/service_principles/requirements.txt
+
+      - name: Install Python dependencies
+        working-directory: scripts/service_principles
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create service principals
+        id: create-sps
+        working-directory: scripts/service_principles
+        run: |
+          python create_service_principals.py
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Display created service principals
+        run: |
+          echo "Service Principals created:"
+          echo '${{ steps.create-sps.outputs.service_principals }}' | jq .
+
+  use-service-principals:
+    name: Use Service Principals in subsequent step
+    needs: setup-service-principals
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Parse service principal outputs
+        id: parse-sps
+        run: |
+          echo "Parsing service principals..."
+          echo '${{ needs.setup-service-principals.outputs.service_principals }}' | jq .
+          
+          # Extract specific service principal IDs for use in other steps
+          echo "groups_client_id=$(echo '${{ needs.setup-service-principals.outputs.service_principals }}' | jq -r '.service_principals.m365_groups.client_id')" >> $GITHUB_OUTPUT
+          echo "groups_object_id=$(echo '${{ needs.setup-service-principals.outputs.service_principals }}' | jq -r '.service_principals.m365_groups.object_id')" >> $GITHUB_OUTPUT
+          
+          echo "windows_client_id=$(echo '${{ needs.setup-service-principals.outputs.service_principals }}' | jq -r '.service_principals.m365_device_management_windows.client_id')" >> $GITHUB_OUTPUT
+          echo "windows_object_id=$(echo '${{ needs.setup-service-principals.outputs.service_principals }}' | jq -r '.service_principals.m365_device_management_windows.object_id')" >> $GITHUB_OUTPUT
+
+      - name: Example usage of service principal IDs
+        run: |
+          echo "Groups SP Client ID: ${{ steps.parse-sps.outputs.groups_client_id }}"
+          echo "Groups SP Object ID: ${{ steps.parse-sps.outputs.groups_object_id }}"
+          echo "Windows SP Client ID: ${{ steps.parse-sps.outputs.windows_client_id }}"
+          echo "Windows SP Object ID: ${{ steps.parse-sps.outputs.windows_object_id }}"
+          
+          # These IDs can now be used to configure Terraform workspaces,
+          # create secrets, or perform other automation tasks
