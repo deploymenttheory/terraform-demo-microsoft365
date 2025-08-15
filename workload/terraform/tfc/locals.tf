@@ -92,6 +92,29 @@ locals {
     }
   }
 
+  # Define workspace dependencies - which workspaces need state from which other workspaces
+  workspace_dependencies = {
+    # Device management workspaces need state from shared resources
+    device_management_windows = ["device_management_shared", "groups"]
+    device_management_macos = ["device_management_shared", "groups"]
+    device_management_android = ["device_management_shared", "groups"]
+    device_management_ios_ipados = ["device_management_shared", "groups"]
+    device_management_linux = ["device_management_shared", "groups"]
+    device_management_windows_365 = ["device_management_shared", "groups"]
+    
+    # Device and app management workspaces need state from shared resources and groups
+    device_and_app_management_windows = ["device_management_shared", "groups"]
+    device_and_app_management_macos = ["device_management_shared", "groups"]
+    device_and_app_management_android = ["device_management_shared", "groups"]
+    device_and_app_management_ios_ipados = ["device_management_shared", "groups"]
+    device_and_app_management_linux = ["device_management_shared", "groups"]
+    device_and_app_management_windows_365 = ["device_management_shared", "groups"]
+    
+    # Shared and groups workspaces don't need state from other workspaces
+    device_management_shared = []
+    groups = []
+  }
+
   # Generate workspace combinations by environment
   sandbox_workspaces = {
     for domain_key in keys(local.domains) :

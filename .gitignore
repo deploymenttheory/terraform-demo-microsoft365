@@ -17,6 +17,6 @@
 *.tfstate
 *.tfstate.backup
 sandbox_env_vars.sh
-
+**/code_snippits.sh
 
 **/.claude/

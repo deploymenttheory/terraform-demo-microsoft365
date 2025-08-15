@@ -1,37 +1,54 @@
 # TFE Workspace Settings resources - Different execution modes per environment
 
-# Sandbox Workspace Settings - CLI-driven (local execution)
+# Sandbox Workspace Settings - Remote execution
 resource "tfe_workspace_settings" "sandbox" {
   for_each = local.sandbox_workspaces
 
   workspace_id   = tfe_workspace.sandbox[each.key].id
-  execution_mode = "local" # CLI-driven execution
-
-  # Agent pool configuration (if using agents)
-  # agent_pool_id = var.agent_pool_id
+  execution_mode = "remote" # Remote execution
   
-  # Configure global remote state for shared workspaces
-  global_remote_state = each.value.global_state
+  # Configure remote state access - disable global access for security
+  global_remote_state = false
+  
+  # Ring-fenced remote state access - only allow specific workspaces that need this workspace's state
+  remote_state_consumer_ids = each.value.global_state ? toset([
+    for k, v in local.sandbox_workspaces : tfe_workspace.sandbox[k].id 
+    if contains(local.workspace_dependencies[k], each.key)
+  ]) : []
 }
 
-# Staging Workspace Settings - VCS-driven (remote execution)
+# Staging Workspace Settings - Remote execution
 resource "tfe_workspace_settings" "staging" {
   for_each = local.staging_workspaces
 
   workspace_id   = tfe_workspace.staging[each.key].id
-  execution_mode = "remote" # VCS-driven execution
+  execution_mode = "remote" # Remote execution
   
-  # Configure global remote state for shared workspaces
-  global_remote_state = each.value.global_state
+  # Configure remote state access - disable global access for security
+  global_remote_state = false
+  
+  # Ring-fenced remote state access - only allow specific workspaces that need this workspace's state
+  remote_state_consumer_ids = each.value.global_state ? toset([
+    for k, v in local.staging_workspaces : tfe_workspace.staging[k].id 
+    if contains(local.workspace_dependencies[k], each.key)
+  ]) : []
+
 }
 
-# Production Workspace Settings - VCS-driven (remote execution)
+# Production Workspace Settings - Remote execution
 resource "tfe_workspace_settings" "production" {
   for_each = local.production_workspaces
 
   workspace_id   = tfe_workspace.production[each.key].id
-  execution_mode = "remote" # VCS-driven execution
+  execution_mode = "remote" # Remote execution
   
-  # Configure global remote state for shared workspaces
-  global_remote_state = each.value.global_state
+  # Configure remote state access - disable global access for security
+  global_remote_state = false
+  
+  # Ring-fenced remote state access - only allow specific workspaces that need this workspace's state
+  remote_state_consumer_ids = each.value.global_state ? toset([
+    for k, v in local.production_workspaces : tfe_workspace.production[k].id 
+    if contains(local.workspace_dependencies[k], each.key)
+  ]) : []
+  
 }

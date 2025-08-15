@@ -18,34 +18,34 @@ resource "microsoft365_graph_beta_device_management_macos_platform_script" "disa
     # Optional: Assignment targeting all devices with include filter
     {
       type        = "allDevicesAssignmentTarget"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_id   = local.common_filter_1
       filter_type = "include"
     },
     # Optional: Assignment targeting all licensed users with exclude filter
     {
       type        = "allLicensedUsersAssignmentTarget"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_id   = local.common_filter_1
       filter_type = "exclude"
     },
     # Optional: Assignment targeting a specific group with include filter
     {
       type        = "groupAssignmentTarget"
       group_id    = "f46f43de-ba95-4fcd-8417-7f0e64b317c2"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_id   = local.common_filter_1
       filter_type = "include"
     },
     # Optional: Assignment targeting a specific group with exclude filter
     {
       type        = "groupAssignmentTarget"
       group_id    = "4f03648f-2a22-4aa2-8131-fb22eea9db3c"
-      filter_id   = "80f8c0a5-f3ec-4936-bcbc-420dc0ca3665"
+      filter_id   = local.common_filter_2
       filter_type = "include"
     },
     # Optional: Assignment targeting a specific group with exclude filter
     {
       type        = "groupAssignmentTarget"
       group_id    = "3ccdd168-fff4-4714-8960-4cd7e0d8d264"
-      filter_id   = "80f8c0a5-f3ec-4936-bcbc-420dc0ca3665"
+      filter_id   = local.common_filter_2
       filter_type = "exclude"
     },
     # Optional: Exclusion group assignments

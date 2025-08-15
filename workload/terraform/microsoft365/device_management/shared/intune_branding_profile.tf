@@ -1,4 +1,4 @@
-resource "microsoft365_graph_beta_device_management_intune_branding_profile" "example" {
+resource "microsoft365_graph_beta_device_management_intune_branding_profile" "company_portal_branding" {
   profile_name                               = "Corporate Branding"
   display_name                               = "Company Portal Branding"
   contact_it_name                            = "IT Support Team"
@@ -49,32 +49,20 @@ resource "microsoft365_graph_beta_device_management_intune_branding_profile" "ex
     {
       platform  = "android"
       owner_type = "company"
-      action    = "removeDeviceAfterRetire"
+      action    = "remove"
     },
     {
       platform  = "iOS"
       owner_type = "personal"
-      action    = "factoryReset"
+      action    = "reset"
     }
   ]
   
   # Role scope tags
   role_scope_tag_ids = ["0"]
   
-  # Assignments are defined as a set
+  # Assignments are defined as a set - only groupAssignmentTarget and exclusionGroupAssignmentTarget are valid
   assignments = [
-    # Optional: Assignment targeting all devices with include filter
-    {
-      type        = "allDevicesAssignmentTarget"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
-      filter_type = "include"
-    },
-    # Optional: Assignment targeting all licensed users with exclude filter
-    {
-      type        = "allLicensedUsersAssignmentTarget"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
-      filter_type = "exclude"
-    },
     # Optional: Assignment targeting a specific group with include filter
     {
       type        = "groupAssignmentTarget"

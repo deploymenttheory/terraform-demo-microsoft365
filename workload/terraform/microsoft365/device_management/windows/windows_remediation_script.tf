@@ -37,7 +37,7 @@ resource "microsoft365_graph_beta_device_management_windows_remediation_script" 
     },
     {
       type        = "allLicensedUsersAssignmentTarget"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_id   = local.common_filter_1
       filter_type = "include"
       
       hourly_schedule = {
@@ -55,7 +55,7 @@ resource "microsoft365_graph_beta_device_management_windows_remediation_script" 
     {
       type        = "groupAssignmentTarget"
       group_id    = "b15228f4-9d49-41ed-9b4f-0e7c721fd9c2"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_id   = local.common_filter_1
       filter_type = "exclude"
       
       run_once_schedule = {
@@ -67,7 +67,7 @@ resource "microsoft365_graph_beta_device_management_windows_remediation_script" 
     {
       type        = "groupAssignmentTarget"
       group_id    = "51a96cdd-4b9b-4849-b416-8c94a6d88797"
-      filter_id   = "2d7956fb-e5b5-4fa3-90b2-5bee9bee7883"
+      filter_id   = local.common_filter_1
       filter_type = "include"
       
       daily_schedule = {
