@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Send Slack Notification
         if: inputs.notification_channel == 'slack'
-        uses: 8398a7/action-slack@v3.18.0
+        uses: 8398a7/action-slack@v3.19.0
         with:
           status: ${{ inputs.result }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
