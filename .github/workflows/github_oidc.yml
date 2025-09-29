@@ -42,6 +42,9 @@ jobs:
         working-directory: workload/terraform/microsoft365/device_management/windows_365
         env:
           TF_WORKSPACE: "m365_device_management_windows_365_production"
+          TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
+          TF_VAR_auth_method: "oidc_github"
+          TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
           M365_TENANT_ID: ${{ secrets.TENANT_ID }}
           M365_AUTH_METHOD: "oidc_github"
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
@@ -50,6 +53,13 @@ jobs:
         id: validate
         run: terraform validate -no-color
         working-directory: workload/terraform/microsoft365/device_management/windows_365
+        env:
+          TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
+          TF_VAR_auth_method: "oidc_github"
+          TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
+          M365_TENANT_ID: ${{ secrets.TENANT_ID }}
+          M365_AUTH_METHOD: "oidc_github"
+          M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
 
       - name: Terraform Plan
         id: plan
@@ -58,7 +68,9 @@ jobs:
         continue-on-error: true
         env:
           TF_WORKSPACE: "m365_device_management_windows_365_production"
-
+          TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
+          TF_VAR_auth_method: "oidc_github"
+          TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
           M365_TENANT_ID: ${{ secrets.TENANT_ID }}
           M365_AUTH_METHOD: "oidc_github"
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
