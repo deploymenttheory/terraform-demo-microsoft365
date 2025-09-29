@@ -56,7 +56,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5.0.0
 
       - name: Upload configuration to tf cloud
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.2
