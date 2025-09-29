@@ -1,8 +1,7 @@
 name: Terraform Microsoft 365
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
 
 # Permission to request the OIDC JWT ID token
 permissions:
