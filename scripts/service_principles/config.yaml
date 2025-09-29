@@ -1,6 +1,6 @@
 service_principals:
   - name: "m365_groups"
-    display_name: "sp-tf-m365-groups"
+    display_name: "SP-TF-M365-RW-GROUPS"
     description: "Service Principal for Microsoft 365 Groups Terraform workspace"
     tags:
       - "terraform"
@@ -18,7 +18,7 @@ service_principals:
         description: "Application.Read.All"
 
   - name: "m365_device_management_shared"
-    display_name: "sp-tf-device-and-app-management-shared"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-SHARED"
     description: "Service Principal for Microsoft 365 Device Management Shared Terraform workspace"
     tags:
       - "terraform"
@@ -46,7 +46,7 @@ service_principals:
         description: "DeviceManagementApps.ReadWrite.All"
 
   - name: "m365_device_management_windows"
-    display_name: "sp-tf-device-and-app-management-windows"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-WINDOWS"
     description: "Service Principal for Microsoft 365 Windows Device Management Terraform workspace"
     tags:
       - "terraform"
@@ -80,7 +80,7 @@ service_principals:
         description: "DeviceManagementRBAC.ReadWrite.All"
 
   - name: "m365_device_management_macos"
-    display_name: "sp-tf-device-and-app-management-macos"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-MACOS"
     description: "Service Principal for Microsoft 365 macOS Device Management Terraform workspace"
     tags:
       - "terraform"
@@ -114,7 +114,7 @@ service_principals:
         description: "DeviceManagementRBAC.ReadWrite.All"
 
   - name: "m365_device_management_android"
-    display_name: "sp-tf-device-and-app-management-android"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-ANDROID"
     description: "Service Principal for Microsoft 365 Android Device Management Terraform workspace"
     tags:
       - "terraform"
@@ -148,7 +148,7 @@ service_principals:
         description: "DeviceManagementRBAC.ReadWrite.All"
 
   - name: "m365_device_management_ios_ipados"
-    display_name: "sp-tf-device-and-app-management-ios-ipados"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-IOS-IPADOS"
     description: "Service Principal for Microsoft 365 iOS/iPadOS Device Management Terraform workspace"
     tags:
       - "terraform"
@@ -182,7 +182,7 @@ service_principals:
         description: "DeviceManagementRBAC.ReadWrite.All"
 
   - name: "m365_device_management_linux"
-    display_name: "sp-tf-device-and-app-management-linux"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-LINUX"
     description: "Service Principal for Microsoft 365 Linux Device Management Terraform workspace"
     tags:
       - "terraform"
@@ -216,7 +216,7 @@ service_principals:
         description: "DeviceManagementRBAC.ReadWrite.All"
 
   - name: "m365_device_management_windows_365"
-    display_name: "sp-tf-device-and-app-management-windows-365"
+    display_name: "SP-TF-M365-RW-DEVICE-MANAGEMENT-WINDOWS-365"
     description: "Service Principal for Microsoft 365 Windows 365 Device Management Terraform workspace"
     tags:
       - "terraform"
