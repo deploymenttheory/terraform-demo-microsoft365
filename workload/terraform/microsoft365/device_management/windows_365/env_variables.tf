@@ -5,7 +5,7 @@ variable "environment" {
   default     = "sandbox"
 
   validation {
-    condition     = contains(["sandbox", "staging"], var.environment)
+    condition     = contains(["sandbox", "staging", "production"], var.environment)
     error_message = "The environment must be one of: sandbox, staging."
   }
 }
