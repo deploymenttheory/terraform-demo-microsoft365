@@ -1,4 +1,4 @@
-name: '🔍 | Workflow 1 - TF Plan With GitHub OIDC Auth'
+name: '🔍 | TF Plan With GitHub OIDC Auth'
 run-name: '📊 TF Speculative Plan | Example of GitHub OIDC Auth'
 
 on:
