@@ -90,7 +90,7 @@ class ServicePrincipalManager:
     def _create_application(self, sp_config: dict) -> Application:
         """Create application in Azure AD"""
         try:
-            # Get environment suffix
+            # Get environment for tagging only
             environment = os.getenv('ENVIRONMENT', 'dev')
             
             # Create required resource access for Microsoft Graph
@@ -99,8 +99,8 @@ class ServicePrincipalManager:
             required_resource_access.resource_app_id = self.config['graph']['resource_app_id']
             required_resource_access.resource_access = resource_access
 
-            # Create application object with environment suffix
-            display_name = f"{sp_config['display_name']}-{environment}"
+            # Create application object using exact display name from config
+            display_name = sp_config['display_name']
             description = f"{sp_config['description']} ({environment} environment)"
             
             application = Application()

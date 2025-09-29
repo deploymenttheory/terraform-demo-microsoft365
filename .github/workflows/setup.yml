@@ -6,10 +6,10 @@ on:
       environment:
         description: 'Environment to deploy to'
         required: true
-        default: 'development'
+        default: 'sandbox'
         type: choice
         options:
-        - development
+        - sandbox
         - staging
         - production
 
@@ -29,7 +29,7 @@ jobs:
     
     strategy:
       matrix:
-        environment: [development, staging, production]
+        environment: [sandbox, staging, production]
       fail-fast: false
     
     steps:
@@ -55,9 +55,9 @@ jobs:
           python create_service_principals.py
         env:
           ENVIRONMENT: ${{ matrix.environment }}
-          AZURE_CLIENT_ID: ${{ matrix.environment == 'development' && secrets.DEVELOPMENT_SETUP_CLIENT_ID || matrix.environment == 'staging' && secrets.STAGING_SETUP_CLIENT_ID || secrets.PRODUCTION_SETUP_CLIENT_ID }}
-          AZURE_TENANT_ID: ${{ matrix.environment == 'development' && secrets.DEVELOPMENT_SETUP_TENANT_ID || matrix.environment == 'staging' && secrets.STAGING_SETUP_TENANT_ID || secrets.PRODUCTION_SETUP_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ matrix.environment == 'development' && secrets.DEVELOPMENT_SETUP_CLIENT_SECRET || matrix.environment == 'staging' && secrets.STAGING_SETUP_CLIENT_SECRET || secrets.PRODUCTION_SETUP_CLIENT_SECRET }}
+          AZURE_CLIENT_ID: ${{ matrix.environment == 'sandbox' && secrets.SANDBOX_SETUP_CLIENT_ID || matrix.environment == 'staging' && secrets.STAGING_SETUP_CLIENT_ID || secrets.PRODUCTION_SETUP_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ matrix.environment == 'sandbox' && secrets.SANDBOX_SETUP_TENANT_ID || matrix.environment == 'staging' && secrets.STAGING_SETUP_TENANT_ID || secrets.PRODUCTION_SETUP_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ matrix.environment == 'sandbox' && secrets.SANDBOX_SETUP_CLIENT_SECRET || matrix.environment == 'staging' && secrets.STAGING_SETUP_CLIENT_SECRET || secrets.PRODUCTION_SETUP_CLIENT_SECRET }}
 
       - name: Display created service principals for ${{ matrix.environment }}
         run: |
