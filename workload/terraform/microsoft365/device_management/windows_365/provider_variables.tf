@@ -18,7 +18,7 @@ variable "tenant_id" {
 variable "auth_method" {
   description = "The authentication method to use for the Entra ID application to authenticate the provider. Options: 'azure_developer_cli' (uses Azure Developer CLI identity), 'device_code', 'client_secret', 'client_certificate', 'interactive_browser', 'workload_identity' (for Kubernetes pods), 'managed_identity' (for Azure resources), 'oidc' (generic OpenID Connect), 'oidc_github' (GitHub Actions-specific), 'oidc_azure_devops' (Azure DevOps-specific). Can also be set using the `M365_AUTH_METHOD` environment variable."
   type        = string
-  default     = "client_secret"
+  default     = "oidc_github"
 
   validation {
     condition     = contains(["azure_developer_cli", "client_secret", "client_certificate", "interactive_browser", "device_code", "workload_identity", "managed_identity", "oidc", "oidc_github", "oidc_azure_devops"], var.auth_method)
