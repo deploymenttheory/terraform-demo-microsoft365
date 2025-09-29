@@ -19,7 +19,7 @@ variable "project_description" {
 variable "terraform_version" {
   description = "Terraform version to use for workspaces"
   type        = string
-  default     = "1.12.2"
+  default     = "1.13.3"
 }
 
 variable "auto_apply_sandbox" {
@@ -120,16 +120,15 @@ variable "vcs_repo_production" {
 variable "terraform_versions" {
   description = "List of Terraform versions to make available in the organization"
   type        = list(string)
-  default     = ["1.12.2", "1.11.7", "1.10.8"]
+  default     = ["1.13.3", "1.13.2"]
 }
 
 variable "terraform_version_shas" {
   description = "SHA256 checksums for Terraform versions"
   type        = map(string)
   default = {
-    "1.12.2" = "b0932a7a5e4b4d50c94f895473e8e0d5c93d6b4b0f4b5b7b35e5a2b5b3e7a0e1e"
-    "1.11.7" = "6441a1b1b6b0b4b5b8e8d0a0b2b5b3e7a0e1e4b5b7b35e5a2b5b3e7a0e1e4b5b"
-    "1.10.8" = "f5a6e5b3e7a0e1e4b5b7b35e5a2b5b3e7a0e1e4b5b7b35e5a2b5b3e7a0e1e4b5"
+    "1.13.3" = "71fc43d92ea09907be5d416d2405a6a9c2d1ceaed633f5e175c0af26e8c4b365"
+    "1.13.2" = "8f58a8e122b5e587271239ad1bd10bdf9a18e9b5411aaeb4deb92b4cfb470f62"
   }
 }
 
