@@ -40,6 +40,8 @@ jobs:
         working-directory: workload/terraform/microsoft365/device_management/windows_365
         env:
           TF_WORKSPACE: "m365_device_management_windows_365_production"
+          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
       
       - name: Terraform Validate
         id: validate
