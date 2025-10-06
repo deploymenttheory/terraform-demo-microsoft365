@@ -12,7 +12,7 @@ variable "cloud" {
 variable "tenant_id" {
   description = "The M365 tenant ID for the Entra ID application. This ID uniquely identifies your Entra ID (EID) instance. It can be found in the Azure portal under Entra ID > Properties. Can also be set using the `M365_TENANT_ID` environment variable."
   type        = string
-  default     = ""
+  default     = "00000000-0000-0000-0000-000000000000"
 }
 
 variable "auth_method" {
