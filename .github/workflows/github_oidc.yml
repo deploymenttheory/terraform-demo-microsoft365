@@ -27,8 +27,6 @@ jobs:
           echo "ACTIONS_ID_TOKEN_REQUEST_URL: ${ACTIONS_ID_TOKEN_REQUEST_URL:-'NOT SET'}"
           echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-'NOT SET'}"
           echo "GITHUB_TOKEN available: ${{ secrets.GITHUB_TOKEN != '' }}"
-          echo "All environment variables containing ACTIONS:"
-          env | grep ACTIONS || echo "No ACTIONS environment variables found"
 
       - name: Terraform fmt
         id: fmt
@@ -42,9 +40,6 @@ jobs:
         working-directory: workload/terraform/microsoft365/device_management/windows_365
         env:
           TF_WORKSPACE: "m365_device_management_windows_365_production"
-          TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
-          TF_VAR_auth_method: "oidc_github"
-          TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
           M365_TENANT_ID: ${{ secrets.TENANT_ID }}
           M365_AUTH_METHOD: "oidc_github"
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
@@ -52,12 +47,9 @@ jobs:
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate
         working-directory: workload/terraform/microsoft365/device_management/windows_365
         env:
-          TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
-          TF_VAR_auth_method: "oidc_github"
-          TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
           M365_TENANT_ID: ${{ secrets.TENANT_ID }}
           M365_AUTH_METHOD: "oidc_github"
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
@@ -69,9 +61,6 @@ jobs:
         continue-on-error: true
         env:
           TF_WORKSPACE: "m365_device_management_windows_365_production"
-          TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
-          TF_VAR_auth_method: "oidc_github"
-          TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
           M365_TENANT_ID: ${{ secrets.TENANT_ID }}
           M365_AUTH_METHOD: "oidc_github"
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
