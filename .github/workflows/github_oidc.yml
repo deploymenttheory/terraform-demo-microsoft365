@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_WORKSPACE: "m365_device_management_windows_365_production"
-      tf_var_auth_method: "oidc_github"
-      tf_var_tenant_id: ${{ secrets.TENANT_ID }}
-      tf_var_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
+      TF_VAR_auth_method: "oidc_github"
+      TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
+      TF_VAR_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
       TF_LOG: DEBUG
     steps:
       - name: Checkout code
@@ -33,10 +33,6 @@ jobs:
           echo "ACTIONS_ID_TOKEN_REQUEST_URL: ${ACTIONS_ID_TOKEN_REQUEST_URL:-'NOT SET'}"
           echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-'NOT SET'}"
           echo "GITHUB_TOKEN available: ${{ secrets.GITHUB_TOKEN != '' }}"
-          echo "M365_TENANT_ID: ${{ secrets.TENANT_ID }}"
-          echo "M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}"
-          echo "Tenant ID length: ${M365_TENANT_ID}"
-          echo "Client ID length: ${M365_CLIENT_ID}"
 
       - name: Terraform fmt
         id: fmt
