@@ -3,7 +3,7 @@ terraform {
   required_providers {
     microsoft365 = {
       source  = "deploymenttheory/microsoft365"
-      version = "0.30.3-alpha"
+      version = "0.32.0-alpha"
     }
 
     azuread = {
