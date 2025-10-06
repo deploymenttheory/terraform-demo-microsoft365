@@ -14,9 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_WORKSPACE: "m365_device_management_windows_365_production"
-      M365_TENANT_ID: ${{ secrets.TENANT_ID }}
+      M365_TENANT_ID: "12345678-1234-1234-1234-123456789012"  # dummy GUID for testing
+      M365_CLIENT_ID: "87654321-4321-4321-4321-210987654321"  # dummy GUID for testing
       M365_AUTH_METHOD: "oidc_github"
-      M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
+      #M365_TENANT_ID: ${{ secrets.TENANT_ID }}
+      #M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
       TF_LOG: DEBUG
     steps:
       - name: Checkout code
