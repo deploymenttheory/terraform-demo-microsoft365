@@ -42,7 +42,7 @@ variable "debug_mode" {
 variable "client_id" {
   description = "The client ID for the Entra ID application. This ID is generated when you register an application in the Entra ID (Azure AD) and can be found under App registrations > YourApp > Overview. Can also be set using the `M365_CLIENT_ID` environment variable."
   type        = string
-  default     = "00000000-0000-0000-0000-000000000000"
+  default     = ""
 }
 
 variable "client_secret" {

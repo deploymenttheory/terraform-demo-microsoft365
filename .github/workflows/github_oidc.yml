@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_WORKSPACE: "m365_device_management_windows_365_production"
-      M365_AUTH_METHOD: "oidc_github"
-      M365_TENANT_ID: ${{ secrets.TENANT_ID }}
-      M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
+      tf_var_auth_method: "oidc_github"
+      tf_var_tenant_id: ${{ secrets.TENANT_ID }}
+      tf_var_client_id: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
       TF_LOG: DEBUG
     steps:
       - name: Checkout code
