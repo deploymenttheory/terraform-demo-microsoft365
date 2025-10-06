@@ -27,6 +27,8 @@ jobs:
           echo "ACTIONS_ID_TOKEN_REQUEST_URL: ${ACTIONS_ID_TOKEN_REQUEST_URL:-'NOT SET'}"
           echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-'NOT SET'}"
           echo "GITHUB_TOKEN available: ${{ secrets.GITHUB_TOKEN != '' }}"
+          echo "M365_TENANT_ID: ${{ secrets.TENANT_ID }}"
+          echo "M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}"
 
       - name: Terraform fmt
         id: fmt
@@ -43,7 +45,6 @@ jobs:
           M365_TENANT_ID: ${{ secrets.TENANT_ID }}
           M365_AUTH_METHOD: "oidc_github"
           M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
-          TF_LOG: DEBUG
       
       - name: Terraform Validate
         id: validate
