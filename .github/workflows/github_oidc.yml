@@ -12,6 +12,12 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      TF_WORKSPACE: "m365_device_management_windows_365_production"
+      M365_TENANT_ID: ${{ secrets.TENANT_ID }}
+      M365_AUTH_METHOD: "oidc_github"
+      M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
+      TF_LOG: DEBUG
     steps:
       - name: Checkout code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -40,32 +46,17 @@ jobs:
         id: init
         run: terraform init
         working-directory: workload/terraform/microsoft365/device_management/windows_365
-        env:
-          TF_WORKSPACE: "m365_device_management_windows_365_production"
-          M365_TENANT_ID: ${{ secrets.TENANT_ID }}
-          M365_AUTH_METHOD: "oidc_github"
-          M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
       
       - name: Terraform Validate
         id: validate
         run: terraform validate
         working-directory: workload/terraform/microsoft365/device_management/windows_365
-        env:
-          M365_TENANT_ID: ${{ secrets.TENANT_ID }}
-          M365_AUTH_METHOD: "oidc_github"
-          M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
 
       - name: Terraform Plan
         id: plan
         run: TF_LOG=DEBUG terraform plan
         working-directory: workload/terraform/microsoft365/device_management/windows_365
         continue-on-error: true
-        env:
-          TF_WORKSPACE: "m365_device_management_windows_365_production"
-          M365_TENANT_ID: ${{ secrets.TENANT_ID }}
-          M365_AUTH_METHOD: "oidc_github"
-          M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}
-
       
       - uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
