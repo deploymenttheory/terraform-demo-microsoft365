@@ -35,6 +35,8 @@ jobs:
           echo "GITHUB_TOKEN available: ${{ secrets.GITHUB_TOKEN != '' }}"
           echo "M365_TENANT_ID: ${{ secrets.TENANT_ID }}"
           echo "M365_CLIENT_ID: ${{ secrets.M365_CLIENT_ID_WINDOWS_365 }}"
+          echo "Tenant ID length: ${M365_TENANT_ID}"
+          echo "Client ID length: ${M365_CLIENT_ID}"
 
       - name: Terraform fmt
         id: fmt
